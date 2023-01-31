@@ -1,4 +1,7 @@
-import listener.RepairListener;
+package de.adam.main;
+
+import com.sun.tools.javac.Main;
+import de.adam.listener.RepairListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,23 +12,21 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
-import utils.LocationFile;
-import utils.MessageFile;
-import utils.SettingsFile;
+import de.adam.utils.LocationFile;
+import de.adam.utils.MessageFile;
+import de.adam.utils.SettingsFile;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
-
-    public class Main extends JavaPlugin implements Listener {
         @SuppressWarnings("unused")
         private static final String defaultPath = "plugins//WarpSystem";
-        private static Main instance;
+        private static PlaycenSystemV2 instance;
 
-        public static Main getInstance() {
-            return Main.instance;
+        public static PlaycenSystemV2 getInstance() {
+            return PlaycenSystemV2.instance;
         }
 
         Scoreboard sb;
@@ -62,7 +63,7 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
         public ArrayList<String> admin = new ArrayList<String>();
         public ArrayList<String> spec = new ArrayList<String>();
 
-        private static Main plugin;
+        private static PlaycenSystemV2 plugin;
 
         private static boolean permissions;
         private static boolean permissionsForNonNameChanges;
@@ -94,13 +95,13 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
             final PluginDescriptionFile pdfFile = this.getDescription();
             this.getLogger().info(String.valueOf(pdfFile.getName()) + " v" + pdfFile.getVersion() + " has been enabled!");
-            Main.plugin = this;
+            PlaycenSystemV2.plugin = this;
             this.getServer().getPluginManager().registerEvents((Listener) new RepairListener(), (Plugin) this);
             this.saveDefaultConfig();
             updateConfig();
-            Main.permissions = this.getConfig().getBoolean("Use Permissions");
-            Main.permissionsForNonNameChanges = this.getConfig().getBoolean("Use_Permissions_If_Not_Changing_Name");
-            Main.filters = this.getConfig().getBoolean("Filter_Enabled");
+            PlaycenSystemV2.permissions = this.getConfig().getBoolean("Use Permissions");
+            PlaycenSystemV2.permissionsForNonNameChanges = this.getConfig().getBoolean("Use_Permissions_If_Not_Changing_Name");
+            PlaycenSystemV2.filters = this.getConfig().getBoolean("Filter_Enabled");
             this.getLogger().info(
                     "Permissions for " + pdfFile.getName() + " are " + (usingPermissions() ? "enabled" : "disabled") + ".");
         }
@@ -127,7 +128,7 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
             /* 38 */     messageFile.loadMessages();
             /*    */   }
 
-        public static Main getPlugin() {
+        public static PlaycenSystemV2 getPlugin() {
             return plugin;
         }
 
@@ -135,15 +136,15 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
         }
 
         public static boolean usingPermissions() {
-            return Main.permissions;
+            return PlaycenSystemV2.permissions;
         }
 
         public static boolean usingPermissionsForNonNameChanges() {
-            return Main.permissionsForNonNameChanges;
+            return PlaycenSystemV2.permissionsForNonNameChanges;
         }
 
         public static boolean usingFilters() {
-            return Main.filters;
+            return PlaycenSystemV2.filters;
         }
 
         public static final String getDefaultPath() {
@@ -208,8 +209,4 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
 
         }
-
-    }
-
-
 }

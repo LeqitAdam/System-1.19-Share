@@ -1,5 +1,6 @@
-package utils;
+package de.adam.utils;
 
+import de.adam.main.PlaycenSystemV2;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -89,7 +90,7 @@ public class LocationFile implements FileBase {
     }
 
     public void loadWarps() {
-        Bukkit.getScheduler().runTaskAsynchronously((Plugin) PlaycenSystemV2.Main.getPlugin(PlaycenSystemV2.Main.class), new Runnable() {
+        Bukkit.getScheduler().runTaskAsynchronously((Plugin) PlaycenSystemV2.getPlugin(PlaycenSystemV2.class), new Runnable() {
             public void run() {
                 File file = new File("plugins/System/Warp/", "warps.yml");
                 YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);

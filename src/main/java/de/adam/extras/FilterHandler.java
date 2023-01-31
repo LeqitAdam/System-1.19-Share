@@ -1,5 +1,6 @@
-package extras;
+package de.adam.extras;
 
+import de.adam.main.PlaycenSystemV2;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -8,10 +9,10 @@ import java.util.List;
 public class FilterHandler {
 
     public static List<String> getIllegalWords() {
-        if (!PlaycenSystemV2.Main.usingFilters()) {
+        if (!PlaycenSystemV2.usingFilters()) {
             return new ArrayList<String>();
         }
-        return (List<String>) PlaycenSystemV2.Main.getPlugin().getConfig().getStringList("Filter");
+        return (List<String>) PlaycenSystemV2.getPlugin().getConfig().getStringList("Filter");
     }
 
     public static List<String> getIllegalWordsInString(String string) {

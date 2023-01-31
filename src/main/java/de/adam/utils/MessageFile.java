@@ -1,4 +1,4 @@
-package utils;
+package de.adam.utils;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 

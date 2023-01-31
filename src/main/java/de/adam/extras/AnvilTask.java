@@ -1,5 +1,6 @@
-package extras;
+package de.adam.extras;
 
+import de.adam.main.PlaycenSystemV2;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.Plugin;
@@ -21,7 +22,7 @@ public class AnvilTask extends BukkitRunnable {
         this.inv = inv;
         this.player = player;
         AnvilTask.anvilTasks.put(inv, this);
-        this.runTaskTimer((Plugin) PlaycenSystemV2.Main.getPlugin(), 1L, 3L);
+        this.runTaskTimer((Plugin) PlaycenSystemV2.getPlugin(), 1L, 3L);
     }
 
     public void run() {

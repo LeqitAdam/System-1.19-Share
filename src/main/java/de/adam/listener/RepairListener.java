@@ -1,8 +1,8 @@
-package listener;
+package de.adam.listener;
 
-import extras.AnvilTask;
-import extras.ColorHandler;
-import extras.FilterHandler;
+import de.adam.extras.AnvilTask;
+import de.adam.extras.ColorHandler;
+import de.adam.extras.FilterHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

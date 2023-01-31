@@ -1,5 +1,6 @@
-package extras;
+package de.adam.extras;
 
+import de.adam.main.PlaycenSystemV2;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
@@ -20,7 +21,7 @@ public class ColorHandler {
     }
 
     public static boolean hasColorPermission(final Player p, final char c) {
-        return !PlaycenSystemV2.Main.usingPermissions() || p.hasPermission("coloredanvils.*")
+        return !PlaycenSystemV2.usingPermissions() || p.hasPermission("coloredanvils.*")
                 || p.hasPermission("coloredanvils.color.*") || p.hasPermission("coloredanvils.color." + c)
                 || p.hasPermission("coloredanvils.color.&" + c);
     }
@@ -37,7 +38,7 @@ public class ColorHandler {
                             .replaceAll("§", "").equals(inputItemMeta.getDisplayName().replaceAll("§", ""))) {
                         outputItemMeta.setDisplayName(inputItemMeta.getDisplayName());
                         outputItem.setItemMeta(outputItemMeta);
-                        return PlaycenSystemV2.Main.usingPermissionsForNonNameChanges() ? colorItemWithPermissions(outputItem, p)
+                        return PlaycenSystemV2.usingPermissionsForNonNameChanges() ? colorItemWithPermissions(outputItem, p)
                                 : outputItem;
                     }
                 }
