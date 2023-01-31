@@ -1,6 +1,7 @@
 package de.adam.main;
 
-import com.sun.tools.javac.Main;
+import de.adam.commands.CMD_Gamemode;
+import de.adam.listener.InventoryClickListener;
 import de.adam.listener.RepairListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,7 +23,6 @@ import java.util.Map;
 public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
         @SuppressWarnings("unused")
-        private static final String defaultPath = "plugins//WarpSystem";
         private static PlaycenSystemV2 instance;
 
         public static PlaycenSystemV2 getInstance() {
@@ -86,32 +86,19 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
             registerCommands();
 
             PluginManager pm = Bukkit.getPluginManager();
+            pm.registerEvents(new InventoryClickListener(), this);
 
             this.getServer().getPluginManager().registerEvents(this, this);
-            loadFiles();
             this.loadListener(Bukkit.getPluginManager());
 
-            // Colored Anvil
-
-            final PluginDescriptionFile pdfFile = this.getDescription();
-            this.getLogger().info(String.valueOf(pdfFile.getName()) + " v" + pdfFile.getVersion() + " has been enabled!");
             PlaycenSystemV2.plugin = this;
             this.getServer().getPluginManager().registerEvents((Listener) new RepairListener(), (Plugin) this);
-            this.saveDefaultConfig();
-            updateConfig();
-            PlaycenSystemV2.permissions = this.getConfig().getBoolean("Use Permissions");
-            PlaycenSystemV2.permissionsForNonNameChanges = this.getConfig().getBoolean("Use_Permissions_If_Not_Changing_Name");
-            PlaycenSystemV2.filters = this.getConfig().getBoolean("Filter_Enabled");
-            this.getLogger().info(
-                    "Permissions for " + pdfFile.getName() + " are " + (usingPermissions() ? "enabled" : "disabled") + ".");
         }
 
         public void registerCommands() {
         }
 
         public void onDisable() {
-            final PluginDescriptionFile pdfFile = this.getDescription();
-            this.getLogger().info(String.valueOf(pdfFile.getName()) + " v" + pdfFile.getVersion() + " has been disabled!");
         }
 
         private void loadFiles() {
@@ -145,24 +132,6 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
         public static boolean usingFilters() {
             return PlaycenSystemV2.filters;
-        }
-
-        public static final String getDefaultPath() {
-            return "plugins//WarpSystem";
-        }
-
-        public static void updateConfig() {
-            final Map<String, Object> map = (Map<String, Object>) getPlugin().getConfig().getValues(false);
-            if (!map.containsKey("Use_Permissions_If_Not_Changing_Name")) {
-                getPlugin().getConfig().set("Use_Permissions_If_Not_Changing_Name", (Object) false);
-            }
-            if (!map.containsKey("Filter_Enabled")) {
-                getPlugin().getConfig().set("Filter_Enabled", (Object) false);
-            }
-            if (!map.containsKey("Filter")) {
-                getPlugin().getConfig().set("Filter", (Object) new String[] { "Filter", "Example" });
-            }
-            getPlugin().saveConfig();
         }
 
         @EventHandler
