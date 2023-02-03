@@ -1,6 +1,7 @@
 package de.adam.main;
 
 import de.adam.commands.CMD_Gamemode;
+import de.adam.listener.CommandSendListener;
 import de.adam.listener.InventoryClickListener;
 import de.adam.listener.RepairListener;
 import org.bukkit.Bukkit;
@@ -9,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
@@ -18,7 +18,6 @@ import de.adam.utils.MessageFile;
 import de.adam.utils.SettingsFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
@@ -81,12 +80,13 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
             plugin = this;
             instance = this;
 
+            //BanSystem.getInstance().getPlayerManager().getPlayer(UUID).getIPs().clear();
+
             loadFiles();
 
             registerCommands();
+            resgisterEvents();
 
-            PluginManager pm = Bukkit.getPluginManager();
-            pm.registerEvents(new InventoryClickListener(), this);
 
             this.getServer().getPluginManager().registerEvents(this, this);
             this.loadListener(Bukkit.getPluginManager());
@@ -96,6 +96,13 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
         }
 
         public void registerCommands() {
+            getCommand("gamemode").setExecutor(new CMD_Gamemode());
+        }
+
+        public void resgisterEvents() {
+            PluginManager pm = Bukkit.getPluginManager();
+            pm.registerEvents(new InventoryClickListener(), this);
+            pm.registerEvents(new CommandSendListener(), this);
         }
 
         public void onDisable() {

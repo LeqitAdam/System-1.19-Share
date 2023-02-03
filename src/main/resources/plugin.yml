@@ -1,3 +1,7 @@
 name: System-1.19
 version: 0.1
 main: de.adam.main.PlaycenSystemV2
+api-version: 1.19
+commands:
+   gamemode:
+      aliases: gm

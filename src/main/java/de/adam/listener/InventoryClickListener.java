@@ -55,7 +55,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onBuild(final PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())) {
+        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId()) || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
             if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 if (e.getClickedBlock().getType().equals(Material.CHEST)) {
                     if (!p.hasPermission("system.plot.edit.chest")) {
@@ -92,6 +92,12 @@ public class InventoryClickListener implements Listener {
                         getNoClick().add(e.getPlayer().getUniqueId());
                     }
                 }
+                if (e.getClickedBlock().getType().equals(Material.BREWING_STAND)) {
+                    if (!p.hasPermission("system.plot.edit.brewingstand")) {
+                        getNoClick().add(e.getPlayer().getUniqueId());
+                    }
+                }
+                allShulker(p, e);
             }
         }
     }
@@ -99,7 +105,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
-        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())) {
+        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())  || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
             if (e.getRightClicked().getType().equals(EntityType.MINECART_HOPPER)) {
                 if (!p.hasPermission("system.plot.edit.hopperminecart")) {
                     getNoClick().add(e.getPlayer().getUniqueId());
@@ -117,6 +123,94 @@ public class InventoryClickListener implements Listener {
     public void onClose(final InventoryCloseEvent e) {
         if (getNoClick().contains(e.getPlayer().getUniqueId())) {
             getNoClick().remove(e.getPlayer().getUniqueId());
+        }
+    }
+
+    public void allShulker(Player p, PlayerInteractEvent e) {
+        if (e.getClickedBlock().getType().equals(Material.SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.yellow")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.YELLOW_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.yellow")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.BLACK_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.black")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.BLUE_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.blue")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.BROWN_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.brown")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.CYAN_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.cyan")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.GRAY_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.gray")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.GREEN_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.green")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.LIGHT_BLUE_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.lightblue")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.LIGHT_GRAY_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.lightgray")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.LIME_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.lime")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.MAGENTA_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.magenta")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.ORANGE_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.orange")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.PINK_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.pink")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.PURPLE_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.purple")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.RED_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.red")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getClickedBlock().getType().equals(Material.WHITE_SHULKER_BOX)) {
+            if (!p.hasPermission("system.plot.edit.shulkerbox.white")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
         }
     }
 }
