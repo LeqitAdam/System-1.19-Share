@@ -1,15 +1,7 @@
 package de.adam.listener;
 
 import com.google.common.collect.Lists;
-import com.plotsquared.core.PlotAPI;
-import com.plotsquared.core.listener.PlotListener;
-import com.plotsquared.core.player.ConsolePlayer;
 import com.plotsquared.core.player.PlotPlayer;
-import com.plotsquared.core.plot.Plot;
-import com.plotsquared.core.plot.PlotArea;
-import com.plotsquared.core.plot.PlotHandler;
-import com.plotsquared.core.plot.PlotManager;
-import de.adam.main.PlaycenSystemV2;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
