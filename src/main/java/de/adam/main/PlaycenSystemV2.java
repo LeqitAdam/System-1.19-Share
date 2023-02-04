@@ -1,10 +1,9 @@
 package de.adam.main;
 
-import de.adam.commands.CMD_Gamemode;
-import de.adam.listener.CommandSendListener;
-import de.adam.listener.InventoryClickListener;
-import de.adam.listener.RepairListener;
+import de.adam.commands.*;
+import de.adam.listener.*;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,12 +11,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import de.adam.utils.LocationFile;
 import de.adam.utils.MessageFile;
 import de.adam.utils.SettingsFile;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
@@ -93,17 +95,98 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
 
             PlaycenSystemV2.plugin = this;
             this.getServer().getPluginManager().registerEvents((Listener) new RepairListener(), (Plugin) this);
+
+            //clearlag
+            startClearLag();
+            anounceClearLag();
         }
 
         public void registerCommands() {
             getCommand("gamemode").setExecutor(new CMD_Gamemode());
+            getCommand("setspawn").setExecutor(new CMD_SetSpawn());
+            getCommand("clearlag").setExecutor(new CMD_Clearlag());
+            getCommand("chatclear").setExecutor(new CMD_Clearchat());
+            getCommand("werkbank").setExecutor(new CMD_Werkbank());
         }
 
         public void resgisterEvents() {
             PluginManager pm = Bukkit.getPluginManager();
             pm.registerEvents(new InventoryClickListener(), this);
             pm.registerEvents(new CommandSendListener(), this);
+            pm.registerEvents(new JoinListener(), this);
+            pm.registerEvents(new LeaveListener(), this);
         }
+
+    private void startClearLag(){
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            CMD_Clearlag cl = new CMD_Clearlag();
+            cl.clearlag();
+            anounceClearLag();
+        }, 20*60*15, 20*60*15);
+    }
+
+    private int time;
+
+    private void anounceClearLag(){
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            for(Player all : Bukkit.getOnlinePlayers()){
+                all.sendMessage(PlaycenSystemV2.pre + " §aIn 1 Minute werden alle am Boden liegenden Items gelöscht.");
+            }
+        }, 20*60*14);
+
+    }
+    /*private void anounceClearLag10sek(){
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            sendClearLag10sek();
+        }, 20*50*1);
+
+    }
+    private void sendClearLag10sek(){
+
+        time = 15;
+        BukkitRunnable runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player all : Bukkit.getOnlinePlayers()) {
+                    switch (time) {
+                        case 15:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 10:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 5:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 4:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 3:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 2:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                        case 1:
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1,1 );
+                            all.sendMessage(PlaycenSystemV2.pre + " §aAlle Items werden in §e" + time + " §asekunden vom Boden §cgelöscht!");
+                            break;
+                    }
+                }
+                if(time == 0) {
+                    cancel();
+                    return;
+                }
+                time--;
+            }
+        };
+    }*/
 
         public void onDisable() {
         }

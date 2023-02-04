@@ -15,7 +15,7 @@ public class CommandSendListener implements Listener {
         String[] cmd = e.getMessage().substring(1).split(" ");
         if(cmd[0].startsWith("p") || cmd[0].startsWith("plots") || cmd[0].startsWith("plot") ||cmd[0].startsWith("plotsquared")
         || cmd[0].startsWith("plotme") || cmd[0].startsWith("p2") || cmd[0].startsWith("2") || cmd[0].startsWith("ps")) {
-            if(cmd[1].startsWith("so") || cmd[1].startsWith("setowner")) {
+            if(cmd[1].equalsIgnoreCase("so") || cmd[1].equalsIgnoreCase("setowner")) {
                 if(!PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())) {
                         if(!p.hasPermission("system.admin.plot.setowner")) {
                             e.setCancelled(true);
@@ -25,7 +25,7 @@ public class CommandSendListener implements Listener {
                             e.setCancelled(true);
                             p.sendMessage(PlaycenSystemV2.pre + " §cDiesem Spieler darfst du keine Plots geben!");
                         }
-                }else if(cmd[2].startsWith("-")) {
+                }else if(cmd[2].equalsIgnoreCase("-")) {
                     if(!p.hasPermission("system.admin.plot.setowner.all")) {
                         e.setCancelled(true);
                         p.sendMessage(PlaycenSystemV2.pre + " §cDuplizieren ist verboten!");

@@ -5,3 +5,9 @@ api-version: 1.19
 commands:
    gamemode:
       aliases: gm
+   setspawn:
+   clearlag:
+   chatclear:
+      aliases: cc,clearchat
+   werkbank:
+      aliases: wb
