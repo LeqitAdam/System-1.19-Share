@@ -32,6 +32,8 @@ public class InventoryClickListener implements Listener {
                     e.setCancelled(true);
                 }else if(e.getClick().isShiftClick()) {
                     e.setCancelled(true);
+                }else if(e.getClick() == ClickType.DOUBLE_CLICK) {
+                    e.setCancelled(true);
                 }
             }
         }
@@ -93,7 +95,6 @@ public class InventoryClickListener implements Listener {
             }
         }
     }
-
     @EventHandler
     public void onEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();

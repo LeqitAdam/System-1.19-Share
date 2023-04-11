@@ -13,7 +13,7 @@ public class CMD_Gamemode implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if (sender.hasPermission("skypvp.gamemode") || sender.hasPermission("skypvp.*")) {
+        if (sender.hasPermission("system.gamemode")) {
             if (cmd.getName().equalsIgnoreCase("gamemode") || cmd.getName().equalsIgnoreCase("gm")) {
                 if (args.length == 1) {
                     if(sender instanceof Player) {
@@ -24,16 +24,16 @@ public class CMD_Gamemode implements CommandExecutor {
                 } else if (args.length == 2) {
                     Player target = Bukkit.getPlayer(args[1]);
                     if (target != null) {
-                        if (!target.hasPermission("skypvp.gamemode.others.bypass.ignore")) {
-                            if (sender.hasPermission("skypvp.gamemode.others")
-                                    || sender.hasPermission("skypvp.*")) {
+                        if (!target.hasPermission("system.gamemode.others.bypass.ignore")) {
+                            if (sender.hasPermission("system.gamemode.others")) {
                                 changeOtherGamemode(sender, target, args);
                             } else sender.sendMessage(PlaycenSystemV2.pre + PlaycenSystemV2.noperm);
-                        } else if (!(target.getName().equals("LeqitSweden") || target.getName().equals("NeraxHD"))) {
-                            if (sender.hasPermission("skypvp.gamemode.others") || sender.hasPermission("skypvp.*")) {
+                        } else if (!(target.getName().equals("LeqitSweden") || target.getName().equals("NeraxHD")
+                        || target.getUniqueId().equals("6c0553a11f8b49979bf33588a5459f36"))) {
+                            if (sender.hasPermission("system.gamemode.others")) {
                                 changeOtherGamemode(sender, target, args);
                             } else sender.sendMessage(PlaycenSystemV2.pre + PlaycenSystemV2.noperm);
-                        } else if (sender.getName().equals("LeqitSweden")) {
+                        } else if (sender.getName().equals("LeqitSweden") || sender.getName().equals("LeqitAdam")) {
                             changeOtherGamemode(sender, target, args);
                         } else
                             sender.sendMessage(PlaycenSystemV2.pre + " §7Du darfst den Spielmodus von §a" + args[1] + " §cnicht verändern!");
