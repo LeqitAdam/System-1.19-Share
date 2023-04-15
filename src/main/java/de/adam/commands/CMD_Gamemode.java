@@ -43,7 +43,6 @@ public class CMD_Gamemode implements CommandExecutor {
         } else sender.sendMessage(PlaycenSystemV2.pre + PlaycenSystemV2.noperm);
         return false;
     }
-
     public static boolean changeOwnGamemode(Player p, String[] args) {
         String arg = args[0];
         int i = Integer.parseInt(arg);
@@ -70,7 +69,6 @@ public class CMD_Gamemode implements CommandExecutor {
                 return false;
         }
     }
-
     public static boolean changeOtherGamemode(CommandSender sender, Player target, String[] args) {
         String arg = args[0];
         int i = Integer.parseInt(arg);
@@ -101,5 +99,4 @@ public class CMD_Gamemode implements CommandExecutor {
                 return false;
         }
     }
-
 }

@@ -104,6 +104,7 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
             getCommand("clearlag").setExecutor(new CMD_Clearlag());
             getCommand("chatclear").setExecutor(new CMD_Clearchat());
             getCommand("werkbank").setExecutor(new CMD_Werkbank());
+            getCommand("sign").setExecutor(new CMD_Sign(plugin));
         }
 
         public void resgisterEvents() {

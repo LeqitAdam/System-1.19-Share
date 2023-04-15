@@ -49,67 +49,24 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onBuild(final PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId()) || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
-            if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                if (e.getClickedBlock().getType().equals(Material.CHEST)) {
-                    if (!p.hasPermission("system.plot.edit.chest")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
+        if(!PlotPlayer.from(p).getLocation().isPlotRoad()) {
+            if(PlotPlayer.from(p).getCurrentPlot() != null) {
+                if(!(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId()) || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
+                    checkPerms(p, e);
                 }
-                if (e.getClickedBlock().getType().equals(Material.TRAPPED_CHEST)) {
-                    if (!p.hasPermission("system.plot.edit.redstonechest")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.DROPPER)) {
-                    if (!p.hasPermission("system.plot.edit.dropper")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.FURNACE)) {
-                    if (!p.hasPermission("system.plot.edit.furnace")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.DISPENSER)) {
-                    if (!p.hasPermission("system.plot.edit.dispenser")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.HOPPER)) {
-                    if (!p.hasPermission("system.plot.edit.hopper")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.BEACON)) {
-                    if (!p.hasPermission("system.plot.edit.beacon")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                if (e.getClickedBlock().getType().equals(Material.BREWING_STAND)) {
-                    if (!p.hasPermission("system.plot.edit.brewingstand")) {
-                        getNoClick().add(e.getPlayer().getUniqueId());
-                    }
-                }
-                allShulker(p, e);
             }
-        }
+        }else checkPerms(p, e);
     }
     @EventHandler
     public void onEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
-        if(PlotPlayer.from(p).getLocation().isPlotRoad() || !(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())  || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
-            if (e.getRightClicked().getType().equals(EntityType.MINECART_HOPPER)) {
-                if (!p.hasPermission("system.plot.edit.hopperminecart")) {
-                    getNoClick().add(e.getPlayer().getUniqueId());
+        if(!PlotPlayer.from(p).getLocation().isPlotRoad()) {
+            if(PlotPlayer.from(p).getCurrentPlot() != null) {
+                if(!(PlotPlayer.from(p).getCurrentPlot().isOwner(p.getUniqueId())  || PlotPlayer.from(p).getCurrentPlot().isAdded(p.getUniqueId()))) {
+                    checkOther(p, e);
                 }
             }
-            if (e.getRightClicked().getType().equals(EntityType.MINECART_CHEST)) {
-                if (!p.hasPermission("system.plot.edit.chestminecart")) {
-                    getNoClick().add(e.getPlayer().getUniqueId());
-                }
-            }
-        }
+        }else checkOther(p, e);
     }
 
     @EventHandler (priority = EventPriority.HIGHEST)
@@ -202,6 +159,63 @@ public class InventoryClickListener implements Listener {
         }
         if (e.getClickedBlock().getType().equals(Material.WHITE_SHULKER_BOX)) {
             if (!p.hasPermission("system.plot.edit.shulkerbox.white")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+    }
+    private void checkPerms(Player p, PlayerInteractEvent e) {
+        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            if (e.getClickedBlock().getType().equals(Material.CHEST)) {
+                if (!p.hasPermission("system.plot.edit.chest")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.TRAPPED_CHEST)) {
+                if (!p.hasPermission("system.plot.edit.redstonechest")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.DROPPER)) {
+                if (!p.hasPermission("system.plot.edit.dropper")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.FURNACE)) {
+                if (!p.hasPermission("system.plot.edit.furnace")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.DISPENSER)) {
+                if (!p.hasPermission("system.plot.edit.dispenser")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.HOPPER)) {
+                if (!p.hasPermission("system.plot.edit.hopper")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.BEACON)) {
+                if (!p.hasPermission("system.plot.edit.beacon")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            if (e.getClickedBlock().getType().equals(Material.BREWING_STAND)) {
+                if (!p.hasPermission("system.plot.edit.brewingstand")) {
+                    getNoClick().add(e.getPlayer().getUniqueId());
+                }
+            }
+            allShulker(p, e);
+        }
+    }
+    private void checkOther(Player p, PlayerInteractEntityEvent e) {
+        if (e.getRightClicked().getType().equals(EntityType.MINECART_HOPPER)) {
+            if (!p.hasPermission("system.plot.edit.hopperminecart")) {
+                getNoClick().add(e.getPlayer().getUniqueId());
+            }
+        }
+        if (e.getRightClicked().getType().equals(EntityType.MINECART_CHEST)) {
+            if (!p.hasPermission("system.plot.edit.chestminecart")) {
                 getNoClick().add(e.getPlayer().getUniqueId());
             }
         }

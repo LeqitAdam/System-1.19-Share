@@ -11,3 +11,4 @@ commands:
       aliases: cc,clearchat
    werkbank:
       aliases: wb
+   sign:
