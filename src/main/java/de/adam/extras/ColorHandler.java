@@ -21,7 +21,7 @@ public class ColorHandler {
     }
 
     public static boolean hasColorPermission(final Player p, final char c) {
-        return !PlaycenSystemV2.usingPermissions() || p.hasPermission("coloredanvils.*")
+        return p.hasPermission("coloredanvils.*")
                 || p.hasPermission("coloredanvils.color.*") || p.hasPermission("coloredanvils.color." + c)
                 || p.hasPermission("coloredanvils.color.&" + c);
     }
@@ -38,7 +38,7 @@ public class ColorHandler {
                             .replaceAll("§", "").equals(inputItemMeta.getDisplayName().replaceAll("§", ""))) {
                         outputItemMeta.setDisplayName(inputItemMeta.getDisplayName());
                         outputItem.setItemMeta(outputItemMeta);
-                        return PlaycenSystemV2.usingPermissionsForNonNameChanges() ? colorItemWithPermissions(outputItem, p)
+                        return p.hasPermission("test") ? colorItemWithPermissions(outputItem, p)
                                 : outputItem;
                     }
                 }

@@ -30,15 +30,16 @@ public class CMD_Clearlag implements CommandExecutor {
         clearlag();
         return false;
     }
-
     public void clearlag(){
         int itemcount = 0;
         for(World w : Bukkit.getWorlds()){
             for(Entity e : w.getEntities()){
-                if(e.getType() == EntityType.DROPPED_ITEM){
-                    itemcount += ((Item) e).getItemStack().getAmount();
-                    e.remove();
-                }
+                if(e != null) {
+                    if(e.getType() == EntityType.DROPPED_ITEM || e.getType().getName() == null){
+                        itemcount += ((Item) e).getItemStack().getAmount();
+                        e.remove();
+                    }
+                }else Bukkit.broadcastMessage(PlaycenSystemV2.pre + "§7Es wurden §c0 §7Items entfernt.");
             }
         }
         for(Player all : Bukkit.getOnlinePlayers()){

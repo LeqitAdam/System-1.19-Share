@@ -9,9 +9,6 @@ import java.util.List;
 public class FilterHandler {
 
     public static List<String> getIllegalWords() {
-        if (!PlaycenSystemV2.usingFilters()) {
-            return new ArrayList<String>();
-        }
         return (List<String>) PlaycenSystemV2.getPlugin().getConfig().getStringList("Filter");
     }
 
