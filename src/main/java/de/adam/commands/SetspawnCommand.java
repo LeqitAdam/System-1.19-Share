@@ -1,6 +1,8 @@
 package de.adam.commands;
 
-import de.adam.main.PlaycenSystemV2;
+import de.adam.main.ZockerWorldCBV1;
+import de.adam.utils.Messages;
+import de.adam.utils.Permissions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,16 +12,14 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 
-public class CMD_SetSpawn implements CommandExecutor {
-
+public class SetspawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(sender instanceof Player){
             File config = new File("plugins/Lobby-Zockerworld", "config.yml");
             YamlConfiguration conf = YamlConfiguration.loadConfiguration(config);
-
             Player p = (Player) sender;
-            if(p.hasPermission("system.setspawn")){
+            if(p.hasPermission(Permissions.setspawncommand)){
                 if(args.length == 0){
                     conf.set("Spawn.world", p.getLocation().getWorld().getName());
                     conf.set("Spawn.x", p.getLocation().getX());
@@ -27,19 +27,15 @@ public class CMD_SetSpawn implements CommandExecutor {
                     conf.set("Spawn.z", p.getLocation().getZ());
                     conf.set("Spawn.yaw", p.getLocation().getYaw());
                     conf.set("Spawn.pitch", p.getLocation().getPitch());
-
                     try {
                         conf.save(config);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    p.sendMessage(PlaycenSystemV2.pre + " §7Der Spawn wurde §agesetzt!");
-                } else {
-                    p.sendMessage(PlaycenSystemV2.pre + " §cBitte benutze: §7/setspawn");
-                }
-            } else p.sendMessage(PlaycenSystemV2.pre + PlaycenSystemV2.noperm);
-        } else
-            sender.sendMessage(PlaycenSystemV2.pre + " §cNur Spieler können diesen Befehl nutzen!");
+                    p.sendMessage(ZockerWorldCBV1.prefix + Messages.setspawnsucces);
+                } else p.sendMessage(ZockerWorldCBV1.prefix + Messages.setspawncommandusage);
+            }else p.sendMessage(ZockerWorldCBV1.prefix + Messages.noperm);
+        }else sender.sendMessage(ZockerWorldCBV1.prefix + Messages.onlyplayeruse);
         return false;
     }
 }

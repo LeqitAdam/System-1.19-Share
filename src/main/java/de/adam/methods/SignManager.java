@@ -1,11 +1,10 @@
 package de.adam.methods;
 
 import com.google.common.collect.Lists;
-import de.adam.main.PlaycenSystemV2;
+import de.adam.main.ZockerWorldCBV1;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.text.SimpleDateFormat;
@@ -13,9 +12,9 @@ import java.util.List;
 
 public class SignManager {
     private ItemStack itemStack;
-    private PlaycenSystemV2 plugin;
+    private ZockerWorldCBV1 plugin;
 
-    public SignManager(final ItemStack itemStack, PlaycenSystemV2 plugin) {
+    public SignManager(final ItemStack itemStack, ZockerWorldCBV1 plugin) {
         this.plugin = plugin;
         this.itemStack = itemStack;
     }

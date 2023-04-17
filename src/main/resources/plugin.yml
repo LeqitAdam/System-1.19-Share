@@ -1,6 +1,6 @@
 name: System-1.19
 version: 0.1
-main: de.adam.main.PlaycenSystemV2
+main: de.adam.main.ZockerWorldCBV1
 api-version: 1.19
 softdepend: [PlotSquaredAPI]
 commands:

@@ -23,6 +23,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>MCStats</id>
+            <url>https://repo.mcstats.org/content/repositories/releases/</url>
+        </repository>
     </repositories>
     <dependencyManagement>
         <dependencies>
@@ -46,6 +50,13 @@
             <artifactId>spigot-api</artifactId>
             <version>1.19.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>Craftbukkit</groupId>
+            <artifactId>Craftbukkit</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/craftbukkit-1.19.2.jar</systemPath>
         </dependency>
     </dependencies>
 

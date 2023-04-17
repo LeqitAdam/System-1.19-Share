@@ -15,26 +15,20 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 
-public class PlaycenSystemV2 extends JavaPlugin implements Listener {
+public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
 
     //"Unknown command. Type \"/help\" for help.";
 
     @SuppressWarnings("unused")
-    private static PlaycenSystemV2 instance;
-    public static PlaycenSystemV2 getInstance() {
-        return PlaycenSystemV2.instance;
+    private static ZockerWorldCBV1 instance;
+    public static ZockerWorldCBV1 getInstance() {
+        return ZockerWorldCBV1.instance;
     }
     Scoreboard sb;
-    public static String
-            pre = "§c§oSystem§7 » ",
-            noperm = "§7Diesen §cBefehl §7darfst du nicht nutzen!",
-            nouse = "§7Diesen §cBefehl §7gibt es nicht!",
-            nocmd = "§7Dieser §cBefehl §7ist auf unserem §aServer §c§lgesperrt!",
-            console = "§7Du musst ein Spieler sein, um diesen §c§lBefehl §7zu nutzen!";
-
+    public static String prefix = "§c§oSystem§7 » ";
     public ArrayList<String> admin = new ArrayList<String>();
     public ArrayList<String> spec = new ArrayList<String>();
-    private static PlaycenSystemV2 plugin;
+    private static ZockerWorldCBV1 plugin;
 
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage("§7§m============§4| §6(§a System §6) §4|§7§m============");
@@ -55,7 +49,7 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         this.loadListener(Bukkit.getPluginManager());
 
-        PlaycenSystemV2.plugin = this;
+        ZockerWorldCBV1.plugin = this;
         this.getServer().getPluginManager().registerEvents((Listener) new RepairListener(), (Plugin) this);
 
         //clearlag
@@ -70,10 +64,10 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
         Bukkit.getConsoleSender().sendMessage("§7§m============§4| §6(§a System §6) §4|§7§m============");
     }
     public void registerCommands() {
-        getCommand("setspawn").setExecutor(new CMD_SetSpawn());
-        getCommand("clearlag").setExecutor(new CMD_Clearlag());
-        getCommand("werkbank").setExecutor(new CMD_Werkbank());
-        getCommand("sign").setExecutor(new CMD_Sign(plugin));
+        getCommand("setspawn").setExecutor(new SetspawnCommand());
+        getCommand("clearlag").setExecutor(new ClearlagCommand());
+        getCommand("werkbank").setExecutor(new WerkbankCommand());
+        getCommand("sign").setExecutor(new SignCommand(plugin));
     }
 
     public void resgisterEvents() {
@@ -87,7 +81,7 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
     //Clearlag Methods
     private void startClearLag(){
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-            CMD_Clearlag cl = new CMD_Clearlag();
+            ClearlagCommand cl = new ClearlagCommand();
             cl.clearlag();
             anounceClearLag();
         }, 20*60*15, 20*60*15);
@@ -96,12 +90,12 @@ public class PlaycenSystemV2 extends JavaPlugin implements Listener {
     private void anounceClearLag(){
         Bukkit.getScheduler().runTaskLater(this, () -> {
             for(Player all : Bukkit.getOnlinePlayers()){
-                all.sendMessage(PlaycenSystemV2.pre + " §aIn 1 Minute werden alle am Boden liegenden Items gelöscht.");
+                all.sendMessage(ZockerWorldCBV1.prefix + " §aIn 1 Minute werden alle am Boden liegenden Items gelöscht.");
             }
         }, 20*60*14);
 
     }
-    public static PlaycenSystemV2 getPlugin() {
+    public static ZockerWorldCBV1 getPlugin() {
         return plugin;
     }
 

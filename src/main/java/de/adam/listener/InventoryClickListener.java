@@ -1,7 +1,17 @@
 package de.adam.listener;
 import com.google.common.collect.Lists;
+import com.plotsquared.core.PlotAPI;
+import com.plotsquared.core.PlotSquared;
+import com.plotsquared.core.location.BlockLoc;
+import com.plotsquared.core.location.PlotLoc;
+import com.plotsquared.core.location.World;
 import com.plotsquared.core.player.PlotPlayer;
+import com.plotsquared.core.plot.Plot;
+import com.plotsquared.core.plot.PlotItemStack;
+import com.plotsquared.core.util.BlockUtil;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -214,5 +224,23 @@ public class InventoryClickListener implements Listener {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
+    }
+    public static void isBlockonUsersPlot(Player player, Block block) {
+        PlotPlayer plotPlayer = PlotPlayer.from(player);
+        PlotLoc loc = new PlotLoc(block.getX(), block.getY(), block.getZ());
+        BlockLoc blockLoc = new BlockLoc(block.getX(), block.getY(), block.getZ());
+        World world = plotPlayer.getLocation().getWorld();
+        PlotAPI plotAPI = new PlotAPI();
+        /*Plot plot = Plot.getPlot(loc);
+        if(!plot.isOwner(plotPlayer.getUUID()) || !plot.isAdded(plotPlayer.getUUID())) {
+            player.sendMessage("Plotblock get worked");
+        }*/
+        Block block2 = PlotPlayer.from(player).getPlatformPlayer().getTargetBlockExact(10);
+        PlotPlayer plotBlock = PlotPlayer.from(block);
+        Plot plot = Plot.getPlot(plotBlock.getLocation());
+        if(!plot.isOwner(plotPlayer.getUUID())) {
+            player.sendMessage("Test worked");
+        }
+        player.sendMessage("Methode ausfegührt");
     }
 }

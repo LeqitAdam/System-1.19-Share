@@ -1,6 +1,6 @@
 package de.adam.listener;
 
-import de.adam.main.PlaycenSystemV2;
+import de.adam.main.ZockerWorldCBV1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -29,8 +29,8 @@ public class JoinListener implements Listener {
 
             p.teleport(loc);
         } catch (Exception ex){
-            p.sendMessage(PlaycenSystemV2.pre + " §cDer Spawn wurde noch nicht gesetzt!");
-            p.sendMessage(PlaycenSystemV2.pre + " §c/setspawn");
+            p.sendMessage(ZockerWorldCBV1.prefix + " §cDer Spawn wurde noch nicht gesetzt!");
+            p.sendMessage(ZockerWorldCBV1.prefix + " §c/setspawn");
         }
     }
 }

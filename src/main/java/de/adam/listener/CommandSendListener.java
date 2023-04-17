@@ -1,7 +1,7 @@
 package de.adam.listener;
 
 import com.plotsquared.core.player.PlotPlayer;
-import de.adam.main.PlaycenSystemV2;
+import de.adam.main.ZockerWorldCBV1;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,12 +23,12 @@ public class CommandSendListener implements Listener {
                             p.sendMessage(" §6plots.admin.command.setowner§c.");
                         }else if(!(p.hasPermission("system.admin.plot.setowner.teamler") || p.hasPermission("system.admin.plot.setowner.all"))) {
                             e.setCancelled(true);
-                            p.sendMessage(PlaycenSystemV2.pre + " §cDiesem Spieler darfst du keine Plots geben!");
+                            p.sendMessage(ZockerWorldCBV1.prefix + " §cDiesem Spieler darfst du keine Plots geben!");
                         }
                 }else if(cmd[2].equalsIgnoreCase("-")) {
                     if(!p.hasPermission("system.admin.plot.setowner.all")) {
                         e.setCancelled(true);
-                        p.sendMessage(PlaycenSystemV2.pre + " §cDuplizieren ist verboten!");
+                        p.sendMessage(ZockerWorldCBV1.prefix + " §cDuplizieren ist verboten!");
                     }
                 }
             }

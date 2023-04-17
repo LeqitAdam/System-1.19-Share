@@ -1,6 +1,5 @@
 package de.adam.extras;
 
-import de.adam.main.PlaycenSystemV2;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
