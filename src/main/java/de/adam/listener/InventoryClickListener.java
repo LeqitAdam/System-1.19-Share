@@ -2,16 +2,20 @@ package de.adam.listener;
 import com.google.common.collect.Lists;
 import com.plotsquared.core.PlotAPI;
 import com.plotsquared.core.PlotSquared;
+import com.plotsquared.core.events.PlotFlagEvent;
 import com.plotsquared.core.location.BlockLoc;
 import com.plotsquared.core.location.PlotLoc;
 import com.plotsquared.core.location.World;
 import com.plotsquared.core.player.PlotPlayer;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.core.plot.PlotItemStack;
+import com.plotsquared.core.plot.flag.types.BlockTypeWrapper;
 import com.plotsquared.core.util.BlockUtil;
+import de.adam.utils.Permissions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +25,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.List;
 import java.util.UUID;
 public class InventoryClickListener implements Listener {
@@ -52,18 +58,17 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onBuild(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if(!PlotPlayer.from(player).getLocation().isPlotRoad()) {
-            if(player.hasPermission(adminperms)) {
-                if(!(PlotPlayer.from(player).getCurrentPlot().isOwner(player.getUniqueId()) || PlotPlayer.from(player).getCurrentPlot().isAdded(player.getUniqueId()))) {
+        if(player.hasPermission(adminperms)) {
+            PlotPlayer plotPlayer = PlotPlayer.from(player);
+            if(!plotPlayer.getLocation().isPlotRoad()) {
+                if(!(plotPlayer.getCurrentPlot().isOwner(player.getUniqueId()) || plotPlayer.getCurrentPlot().isAdded(player.getUniqueId()))) {
                     checkPerms(player, event);
                 }
-            }
-        }else if(player.hasPermission(adminperms)) {
-            checkPerms(player, event);
+            }else checkPerms(player, event);
         }
     }
     @EventHandler
-    public void onEntity(PlayerInteractEntityEvent event) {
+    public void onEntity(PlayerInteractEntityEvent event, PlotFlagEvent events) {
         Player player = event.getPlayer();
         if(!PlotPlayer.from(player).getLocation().isPlotRoad()) {
             if(player.hasPermission(adminperms)) {
@@ -83,87 +88,87 @@ public class InventoryClickListener implements Listener {
     }
     public void allShulker(Player p, PlayerInteractEvent event) {
         if (event.getClickedBlock().getType().equals(Material.SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.yellow")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.YELLOW_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.yellow")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.yellow")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.BLACK_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.black")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.black")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.BLUE_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.blue")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.blue")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.BROWN_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.brown")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.brown")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.CYAN_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.cyan")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.cyan")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.GRAY_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.gray")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.gray")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.GREEN_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.green")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.green")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.LIGHT_BLUE_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.lightblue")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.lightblue")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.LIGHT_GRAY_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.lightgray")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.lightgray")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.LIME_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.lime")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.lime")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.MAGENTA_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.magenta")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.magenta")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.ORANGE_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.orange")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.orange")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.PINK_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.pink")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.pink")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.PURPLE_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.purple")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.purple")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.RED_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.red")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.red")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getClickedBlock().getType().equals(Material.WHITE_SHULKER_BOX)) {
-            if (!p.hasPermission("system.plot.edit.shulkerbox.white")) {
+            if (!p.hasPermission("zockerworld.plots.edit.shulkerbox.white")) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
@@ -171,42 +176,42 @@ public class InventoryClickListener implements Listener {
     private void checkPerms(Player p, PlayerInteractEvent event) {
         if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (event.getClickedBlock().getType().equals(Material.CHEST)) {
-                if (!p.hasPermission("system.plot.edit.chest")) {
+                if (!p.hasPermission(Permissions.editchest)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.TRAPPED_CHEST)) {
-                if (!p.hasPermission("system.plot.edit.redstonechest")) {
+                if (!p.hasPermission(Permissions.editredtonechest)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.DROPPER)) {
-                if (!p.hasPermission("system.plot.edit.dropper")) {
+                if (!p.hasPermission(Permissions.editdropper)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.FURNACE)) {
-                if (!p.hasPermission("system.plot.edit.furnace")) {
+                if (!p.hasPermission(Permissions.editfurnace)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.DISPENSER)) {
-                if (!p.hasPermission("system.plot.edit.dispenser")) {
+                if (!p.hasPermission(Permissions.editdispenser)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.HOPPER)) {
-                if (!p.hasPermission("system.plot.edit.hopper")) {
+                if (!p.hasPermission(Permissions.edithopper)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.BEACON)) {
-                if (!p.hasPermission("system.plot.edit.beacon")) {
+                if (!p.hasPermission(Permissions.editbeacon)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
             if (event.getClickedBlock().getType().equals(Material.BREWING_STAND)) {
-                if (!p.hasPermission("system.plot.edit.brewingstand")) {
+                if (!p.hasPermission(Permissions.editbrewingstand)) {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
@@ -229,18 +234,9 @@ public class InventoryClickListener implements Listener {
         PlotPlayer plotPlayer = PlotPlayer.from(player);
         PlotLoc loc = new PlotLoc(block.getX(), block.getY(), block.getZ());
         BlockLoc blockLoc = new BlockLoc(block.getX(), block.getY(), block.getZ());
+
         World world = plotPlayer.getLocation().getWorld();
         PlotAPI plotAPI = new PlotAPI();
-        /*Plot plot = Plot.getPlot(loc);
-        if(!plot.isOwner(plotPlayer.getUUID()) || !plot.isAdded(plotPlayer.getUUID())) {
-            player.sendMessage("Plotblock get worked");
-        }*/
-        Block block2 = PlotPlayer.from(player).getPlatformPlayer().getTargetBlockExact(10);
-        PlotPlayer plotBlock = PlotPlayer.from(block);
-        Plot plot = Plot.getPlot(plotBlock.getLocation());
-        if(!plot.isOwner(plotPlayer.getUUID())) {
-            player.sendMessage("Test worked");
-        }
         player.sendMessage("Methode ausfegührt");
     }
 }
