@@ -1,21 +1,14 @@
 package de.adam.listener;
 import com.google.common.collect.Lists;
 import com.plotsquared.core.PlotAPI;
-import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.events.PlotFlagEvent;
 import com.plotsquared.core.location.BlockLoc;
 import com.plotsquared.core.location.PlotLoc;
 import com.plotsquared.core.location.World;
 import com.plotsquared.core.player.PlotPlayer;
-import com.plotsquared.core.plot.Plot;
-import com.plotsquared.core.plot.PlotItemStack;
-import com.plotsquared.core.plot.flag.types.BlockTypeWrapper;
-import com.plotsquared.core.util.BlockUtil;
 import de.adam.utils.Permissions;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,11 +18,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 import java.util.UUID;
-public class InventoryClickListener implements Listener {
+public class InventoryClickHandler implements Listener {
     public static List<UUID> getNoClick() {
         return noClick;
     }
@@ -59,12 +51,15 @@ public class InventoryClickListener implements Listener {
     public void onBuild(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if(player.hasPermission(adminperms)) {
-            PlotPlayer plotPlayer = PlotPlayer.from(player);
-            if(!plotPlayer.getLocation().isPlotRoad()) {
-                if(!(plotPlayer.getCurrentPlot().isOwner(player.getUniqueId()) || plotPlayer.getCurrentPlot().isAdded(player.getUniqueId()))) {
+            if(event.isCancelled()) {
+                if(PlotPlayer.from(player).getCurrentPlot() != null) {
+                    event.setCancelled(false);
+                    checkPerms(player, event);
+                }else if(PlotPlayer.from(player).getLocation().isPlotRoad()){
+                    event.setCancelled(false);
                     checkPerms(player, event);
                 }
-            }else checkPerms(player, event);
+            }
         }
     }
     @EventHandler

@@ -4,6 +4,7 @@ public class Messages {
     public static String
             noperm = "§cDiesen Befehl darfst du nicht verwenden!",
             onlyplayeruse = "§cDiesen Befehl können nur Spieler verwenden!",
+            usenumber = "§cDu musst eine Zahl angeben!",
 
 
     //SignCommand
@@ -20,6 +21,12 @@ public class Messages {
             setspawnsucces = "§7Der Spawn wurde §agesetzt!",
     //ClearlagCommand
             clearlagcommandusage = "§cBitte benutze: §7/clearlag",
+    //CutomItemCommand
+            customitemcommandusage = "§cBitte benutze: §7/customitem create <item> <amount>",
+            customitemcreated = "§bDas Item wurde in dein Inventar gelegt.",
+    //RangErhalten
+            hasrankalready = "§cDu hast bereits einen besseren Rang.",
+            zockerrankadded = "§7Du hast den §dZocker§7-§aRang §7erhalten.",
     //WerkbankCommand
             wbcommandusage = "§cBitte benutze: §7/wb";
 }

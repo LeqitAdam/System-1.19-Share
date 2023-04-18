@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class RepairListener implements Listener {
+public class RepairHandler implements Listener {
 
     @EventHandler
     public void onAnvilGUIClick(final InventoryClickEvent event) {

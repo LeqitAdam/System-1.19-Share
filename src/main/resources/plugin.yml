@@ -3,9 +3,12 @@ version: 0.1
 main: de.adam.main.ZockerWorldCBV1
 api-version: 1.19
 softdepend: [PlotSquaredAPI]
+depend: [GlobalSystem]
 commands:
    setspawn:
    clearlag:
    werkbank:
       aliases: [wb]
    sign:
+   customitem:
+      aliases: [ci]

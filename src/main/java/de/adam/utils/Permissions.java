@@ -9,6 +9,9 @@ public class Permissions {
             setspawncommand = "zockerworld.setspawn",
     //ClearlagCommandPerms
             clearlagcommand = "zockerworld.clearlag",
+    //CustomItemPerms
+            creatcustomitemcommand = "zockerworld.create.customitem",
+            createzockeritem = "zockerworld.create.zockeritem",
     //InteracWithPlotsPerms
             editchest = "zockerworld.plots.edit.chest",
             editredtonechest = "zockerworld.plots.edit.redstonechest",
@@ -18,6 +21,8 @@ public class Permissions {
             edithopper = "zockerworld.plots.edit.hopper",
             editbeacon = "zockerworld.plots.edit.beacon",
             editbrewingstand = "zockerworld.plots.edit.brewingstand",
+    //CustomItemRankAdd
+            bypassrankaddblock = "zockerworld.rank.redeed.bypass",
     //WerkbankCommandPerms
             wbcommand = "zockerworld.wb";
 }

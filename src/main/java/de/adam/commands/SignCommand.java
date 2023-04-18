@@ -45,7 +45,7 @@ public class SignCommand implements CommandExecutor {
                             }
                             if (!signManager.isSigned(signItem)) {
                                 player.setItemInHand(signManager.sign(player.getName(), stringBuilder.toString()));
-                                player.sendMessage(ZockerWorldCBV1.prefix + Messages.signremoved);
+                                player.sendMessage(ZockerWorldCBV1.prefix + Messages.signadded);
                             }else player.sendMessage(ZockerWorldCBV1.prefix + Messages.signedalready);
                         }
                     }else player.sendMessage(ZockerWorldCBV1.prefix + Messages.signonlyone);

@@ -31,7 +31,7 @@ public class ClearlagCommand implements CommandExecutor {
     }
     public void clearlag(){
         int itemcount = 0;
-        for(World w : Bukkit.getWorlds()){
+        for(World w : Bukkit.getServer().getWorlds()){
             for(Entity e : w.getEntities()){
                 if(e != null) {
                     if(e.getType() == EntityType.DROPPED_ITEM || e.getType().getName() == null){

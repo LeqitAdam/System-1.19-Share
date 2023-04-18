@@ -25,7 +25,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         return ZockerWorldCBV1.instance;
     }
     Scoreboard sb;
-    public static String prefix = "§c§oSystem§7 » ";
+    public static String prefix = "§9CityBuild§7 » ";
     public ArrayList<String> admin = new ArrayList<String>();
     public ArrayList<String> spec = new ArrayList<String>();
     private static ZockerWorldCBV1 plugin;
@@ -50,7 +50,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         this.loadListener(Bukkit.getPluginManager());
 
         ZockerWorldCBV1.plugin = this;
-        this.getServer().getPluginManager().registerEvents((Listener) new RepairListener(), (Plugin) this);
+        this.getServer().getPluginManager().registerEvents((Listener) new RepairHandler(), (Plugin) this);
 
         //clearlag
         startClearLag();
@@ -68,14 +68,16 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         getCommand("clearlag").setExecutor(new ClearlagCommand());
         getCommand("werkbank").setExecutor(new WerkbankCommand());
         getCommand("sign").setExecutor(new SignCommand(plugin));
+        getCommand("customitem").setExecutor(new CustomItemCommand());
     }
 
     public void resgisterEvents() {
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new InventoryClickListener(), this);
-        pm.registerEvents(new CommandSendListener(), this);
-        pm.registerEvents(new JoinListener(), this);
-        pm.registerEvents(new LeaveListener(), this);
+        pm.registerEvents(new InventoryClickHandler(), this);
+        pm.registerEvents(new CommandHandler(), this);
+        pm.registerEvents(new PlayerHandler(), this);
+        pm.registerEvents(new RepairHandler(), this);
+        pm.registerEvents(new CustomItemHandler(), this);
     }
 
     //Clearlag Methods
@@ -83,8 +85,8 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
             ClearlagCommand cl = new ClearlagCommand();
             cl.clearlag();
-            anounceClearLag();
         }, 20*60*15, 20*60*15);
+        anounceClearLag();
     }
     private int time;
     private void anounceClearLag(){
@@ -104,7 +106,6 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     @EventHandler
 
     public void onJoin(PlayerJoinEvent e) {
-
         Player p = e.getPlayer();
         for (String S : admin) {
             Player all = Bukkit.getPlayer(S);
@@ -130,7 +131,5 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
                 p.showPlayer(all);
             }
         }
-
-
     }
 }

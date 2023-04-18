@@ -27,6 +27,10 @@
             <id>MCStats</id>
             <url>https://repo.mcstats.org/content/repositories/releases/</url>
         </repository>
+        <repository>
+            <id>cloudnet-releases</id>
+            <url>https://repo.cloudnetservice.eu/repository/releases/</url>
+        </repository>
     </repositories>
     <dependencyManagement>
         <dependencies>
@@ -52,11 +56,24 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet-driver</artifactId>
+            <version>3.4.5-RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>Craftbukkit</groupId>
             <artifactId>Craftbukkit</artifactId>
             <scope>system</scope>
             <version>1.0</version>
             <systemPath>${project.basedir}/libs/craftbukkit-1.19.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ZockerWorld</groupId>
+            <artifactId>ZockerWorld</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/ZockerWorldGlobal-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 
