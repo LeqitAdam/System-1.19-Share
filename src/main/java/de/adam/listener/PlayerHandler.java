@@ -2,13 +2,7 @@ package de.adam.listener;
 
 import com.plotsquared.core.events.PlotFlagAddEvent;
 import com.plotsquared.core.player.PlotPlayer;
-import de.adam.globalsystemv1.methods.PermsManager;
-import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import de.adam.main.ZockerWorldCBV1;
-import de.adam.utils.Messages;
-import de.adam.utils.Permissions;
-import de.dytanic.cloudnet.driver.CloudNetDriver;
-import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -16,13 +10,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.UUID;
