@@ -2,6 +2,7 @@ package de.adam.listener;
 
 import com.plotsquared.core.player.PlotPlayer;
 import com.plotsquared.core.plot.Plot;
+import de.adam.globalsystemv1.main.GlobalSystem;
 import de.adam.main.ZockerWorldCBV1;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
@@ -48,7 +49,7 @@ public class CommandHandler implements Listener {
             if(cmd[1].equalsIgnoreCase("flag") && cmd[3].equalsIgnoreCase("gamemode")) {
                 if(!p.hasPermission("*")) {
                     e.setCancelled(true);
-
+                    p.sendMessage(ZockerWorldCBV1.prefix + "§cVersuch nicht die Wirtschaft zu zerstören.");
                 }
             }
         }
