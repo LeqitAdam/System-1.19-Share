@@ -1,8 +1,8 @@
-package de.adam.commands;
+package de.adam.cbsystemv1.commands;
 
-import de.adam.main.ZockerWorldCBV1;
-import de.adam.files.Messages;
-import de.adam.files.Permissions;
+import de.adam.cbsystemv1.files.Messages;
+import de.adam.cbsystemv1.files.Permissions;
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -24,8 +24,8 @@ public class ClearlagCommand implements CommandExecutor {
                     clearlag();
                     return true;
                 } else p.sendMessage(ZockerWorldCBV1.prefix + Messages.clearlagcommandusage);
-            } else p.sendMessage(ZockerWorldCBV1.prefix + Messages.noperm);
-        } else sender.sendMessage(ZockerWorldCBV1.prefix + Messages.onlyplayeruse);
+            } else p.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
+        } else sender.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.onlyplayeruse);
         clearlag();
         return false;
     }

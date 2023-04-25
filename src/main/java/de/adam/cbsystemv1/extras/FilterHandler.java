@@ -1,6 +1,6 @@
-package de.adam.extras;
+package de.adam.cbsystemv1.extras;
 
-import de.adam.main.ZockerWorldCBV1;
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;

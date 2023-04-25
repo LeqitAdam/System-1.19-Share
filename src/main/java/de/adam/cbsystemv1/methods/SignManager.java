@@ -1,7 +1,7 @@
-package de.adam.methods;
+package de.adam.cbsystemv1.methods;
 
 import com.google.common.collect.Lists;
-import de.adam.main.ZockerWorldCBV1;
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

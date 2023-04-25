@@ -1,10 +1,10 @@
-package de.adam.listener;
+package de.adam.cbsystemv1.listener;
 
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import de.adam.globalsystemv1.methods.PermsManager;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;
-import de.adam.main.ZockerWorldCBV1;
-import de.adam.files.Messages;
-import de.adam.files.Permissions;
+import de.adam.cbsystemv1.files.Messages;
+import de.adam.cbsystemv1.files.Permissions;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

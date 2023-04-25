@@ -1,4 +1,4 @@
-package de.adam.methods;
+package de.adam.cbsystemv1.methods;
 
 import com.google.common.collect.Lists;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;

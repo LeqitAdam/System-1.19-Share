@@ -1,9 +1,9 @@
-package de.adam.commands;
+package de.adam.cbsystemv1.commands;
 
-import de.adam.main.ZockerWorldCBV1;
-import de.adam.methods.CustomItemManager;
-import de.adam.files.Messages;
-import de.adam.files.Permissions;
+import de.adam.cbsystemv1.files.Messages;
+import de.adam.cbsystemv1.files.Permissions;
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
+import de.adam.cbsystemv1.methods.CustomItemManager;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,11 +40,11 @@ public class CustomItemCommand implements CommandExecutor {
                                 }
                             }
                         }catch (NumberFormatException e) {
-                            player.sendMessage(ZockerWorldCBV1.prefix + Messages.usenumber);
+                            player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.usenumber);
                         }
                     }else  player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcommandusage);
-                }else player.sendMessage(ZockerWorldCBV1.prefix + Messages.noperm);
-            }else sender.sendMessage(ZockerWorldCBV1.prefix + Messages.onlyplayeruse);
+                }else player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
+            }else sender.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.onlyplayeruse);
         }
         return false;
     }

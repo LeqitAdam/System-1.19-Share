@@ -1,4 +1,4 @@
-package de.adam.files;
+package de.adam.cbsystemv1.files;
 
 public class Permissions {
     public static String
@@ -33,6 +33,9 @@ public class Permissions {
             bypassrankaddblock = "zockerworld.rank.redeed.bypass",
     //CommandBlockPerms
             bypassadmincommands = "zockerworld.admin.commands",
+    //SetshopCommand
+            setvillager = "zockerworld.setvillager",
+            killvillager = "zockerworld.killvillager",
     //WerkbankCommandPerms
             wbcommand = "zockerworld.wb";
 }

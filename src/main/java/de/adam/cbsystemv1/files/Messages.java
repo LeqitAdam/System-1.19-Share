@@ -1,11 +1,8 @@
-package de.adam.files;
+package de.adam.cbsystemv1.files;
 
 public class Messages {
     public static String
-            noperm = "§cDiesen Befehl darfst du nicht verwenden!",
-            onlyplayeruse = "§cDiesen Befehl können nur Spieler verwenden!",
-            usenumber = "§cDu musst eine Zahl angeben!",
-
+            notenoughbalance = "§cDu hast nicht genug Geld.",
 
     //SignCommand
             signcommandusage = "§cBitte benutze: §7/sign <Nachricht>",
@@ -27,6 +24,8 @@ public class Messages {
     //RangErhalten
             hasrankalready = "§cDu hast bereits einen besseren Rang.",
             zockerrankadded = "§7Du hast den §dZocker§7-§aRang §7erhalten.",
+    //Setvillager
+            setvillagercommandusage = "§7Nutze /setvillager <admin, shop>",
     //WerkbankCommand
             wbcommandusage = "§cBitte benutze: §7/wb";
 }

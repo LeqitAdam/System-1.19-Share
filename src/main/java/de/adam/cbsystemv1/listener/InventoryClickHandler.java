@@ -1,14 +1,8 @@
-package de.adam.listener;
+package de.adam.cbsystemv1.listener;
 import com.google.common.collect.Lists;
-import com.plotsquared.core.PlotAPI;
-import com.plotsquared.core.events.PlotFlagEvent;
-import com.plotsquared.core.location.BlockLoc;
-import com.plotsquared.core.location.PlotLoc;
-import com.plotsquared.core.location.World;
 import com.plotsquared.core.player.PlotPlayer;
-import de.adam.files.Permissions;
+import de.adam.cbsystemv1.files.Permissions;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

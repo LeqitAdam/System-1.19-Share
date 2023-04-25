@@ -43,6 +43,10 @@
             <id>cloudnet-releases</id>
             <url>https://repo.cloudnetservice.eu/repository/releases/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
     <dependencyManagement>
         <dependencies>
@@ -86,6 +90,12 @@
             <scope>system</scope>
             <version>1.0</version>
             <systemPath>S:/Adam/MEGA/Freigeben/Entwicklung/libs/ZockerWorldGlobal-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

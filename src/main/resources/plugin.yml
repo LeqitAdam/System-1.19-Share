@@ -1,9 +1,9 @@
 name: System-1.19
 version: 0.1
-main: de.adam.main.ZockerWorldCBV1
+main: de.adam.cbsystemv1.main.ZockerWorldCBV1
 api-version: 1.19
-softdepend: [PlotSquaredAPI]
-depend: [GlobalSystem]
+softdepend: []
+depend: [GlobalSystem, Vault, PlotSquared]
 commands:
    setspawn:
    clearlag:
@@ -12,3 +12,4 @@ commands:
    sign:
    customitem:
       aliases: [ci]
+   setshop:

@@ -1,10 +1,18 @@
-package de.adam.main;
+package de.adam.cbsystemv1.main;
 
-//import ch.dkrieger.bansystem.lib.BanSystem;
-import de.adam.commands.*;
-import de.adam.listener.*;
+import de.adam.cbsystemv1.commands.*;
+import de.adam.cbsystemv1.listener.*;
+import de.adam.cbsystemv1.methods.EconManager;
+import de.adam.cbsystemv1.shop.adminshop.listener.InventoryHandler;
+import de.adam.cbsystemv1.shop.adminshop.villager.AdminshopVillager;
+import de.adam.cbsystemv1.shop.adminshop.villager.VillagerHandler;
+import de.adam.globalsystemv1.main.GlobalSystemSpigot;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,7 +21,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
 
@@ -29,6 +39,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     public ArrayList<String> admin = new ArrayList<String>();
     public ArrayList<String> spec = new ArrayList<String>();
     private static ZockerWorldCBV1 plugin;
+    private static final Logger log = Logger.getLogger("Minecraft");
 
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage("§7§m============§4| §6(§a System §6) §4|§7§m============");
@@ -40,18 +51,15 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         plugin = this;
         instance = this;
 
-        //BanSystem.getInstance().getPlayerManager().getPlayer(UUID).getIPs().clear();
-
         registerCommands();
         resgisterEvents();
-
+        registerEcon();
 
         this.getServer().getPluginManager().registerEvents(this, this);
         this.loadListener(Bukkit.getPluginManager());
 
         ZockerWorldCBV1.plugin = this;
-        this.getServer().getPluginManager().registerEvents((Listener) new RepairHandler(), (Plugin) this);
-
+        this.getServer().getPluginManager().registerEvents(new RepairHandler(), this);
         //clearlag
         startClearLag();
     }
@@ -69,8 +77,8 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         getCommand("werkbank").setExecutor(new WerkbankCommand());
         getCommand("sign").setExecutor(new SignCommand(plugin));
         getCommand("customitem").setExecutor(new CustomItemCommand());
+        getCommand("setshop").setExecutor(new SetshopCommand());
     }
-
     public void resgisterEvents() {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new InventoryClickHandler(), this);
@@ -78,8 +86,19 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         pm.registerEvents(new PlayerHandler(), this);
         pm.registerEvents(new RepairHandler(), this);
         pm.registerEvents(new CustomItemHandler(), this);
+        pm.registerEvents(new InventoryHandler(), this);
+        pm.registerEvents(new VillagerHandler(), this);
     }
-
+    public void registerEcon() {
+        EconManager econ = new EconManager();
+        if (!econ.setupEconomy() ) {
+            log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        econ.setupChat();
+        econ.setupPermissions();
+    }
     //Clearlag Methods
     private void startClearLag(){
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
@@ -100,11 +119,9 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     public static ZockerWorldCBV1 getPlugin() {
         return plugin;
     }
-
     private void loadListener(final PluginManager pluginManager) {
     }
     @EventHandler
-
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         for (String S : admin) {

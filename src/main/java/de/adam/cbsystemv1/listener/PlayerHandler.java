@@ -1,8 +1,8 @@
-package de.adam.listener;
+package de.adam.cbsystemv1.listener;
 
 import com.plotsquared.core.events.PlotFlagAddEvent;
 import com.plotsquared.core.player.PlotPlayer;
-import de.adam.main.ZockerWorldCBV1;
+import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -44,15 +44,5 @@ public class PlayerHandler implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         event.setDeathMessage(null);
-    }
-    @EventHandler
-    public void onChangeFlag(PlotFlagAddEvent event) {
-        if(event.getFlag().equals("gamemode")) {
-            UUID uuid = event.getPlot().getOwner();
-            PlotPlayer plotPlayer = PlotPlayer.from(uuid);
-            if(!plotPlayer.hasPermission("*")) {
-                event.setEventResult(null);
-            }
-        }
     }
 }

@@ -1,4 +1,4 @@
-package de.adam.extras;
+package de.adam.cbsystemv1.extras;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
