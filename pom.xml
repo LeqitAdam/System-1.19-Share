@@ -13,6 +13,18 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <outputDirectory>S:\Adam\MEGA\Freigeben\Entwicklung\libs</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <repository>
@@ -73,7 +85,7 @@
             <artifactId>ZockerWorld</artifactId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${project.basedir}/libs/ZockerWorldGlobal-1.0-SNAPSHOT.jar</systemPath>
+            <systemPath>S:/Adam/MEGA/Freigeben/Entwicklung/libs/ZockerWorldGlobal-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 

@@ -6,7 +6,7 @@ import com.plotsquared.core.location.BlockLoc;
 import com.plotsquared.core.location.PlotLoc;
 import com.plotsquared.core.location.World;
 import com.plotsquared.core.player.PlotPlayer;
-import de.adam.utils.Permissions;
+import de.adam.files.Permissions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -26,7 +26,6 @@ public class InventoryClickHandler implements Listener {
         return noClick;
     }
     public static List<UUID> noClick = Lists.newArrayList();
-    private String adminperms = "plots.admin.interact.other";
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onclick(final InventoryClickEvent event) {
         if(event.getCurrentItem() != null) {
@@ -50,29 +49,23 @@ public class InventoryClickHandler implements Listener {
     @EventHandler
     public void onBuild(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if(player.hasPermission(adminperms)) {
-            if(event.isCancelled()) {
-                if(PlotPlayer.from(player).getCurrentPlot() != null) {
-                    event.setCancelled(false);
-                    checkPerms(player, event);
-                }else if(PlotPlayer.from(player).getLocation().isPlotRoad()){
-                    event.setCancelled(false);
-                    checkPerms(player, event);
-                }
+        if(player.hasPermission(Permissions.interact)) {
+            if(PlotPlayer.from(player).getCurrentPlot() != null) {
+                checkPerms(player, event);
+            }else if(PlotPlayer.from(player).getLocation().isPlotRoad()){
+                checkPerms(player, event);
             }
         }
     }
     @EventHandler
-    public void onEntity(PlayerInteractEntityEvent event, PlotFlagEvent events) {
+    public void onEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
-        if(!PlotPlayer.from(player).getLocation().isPlotRoad()) {
-            if(player.hasPermission(adminperms)) {
-                if(!(PlotPlayer.from(player).getCurrentPlot().isOwner(player.getUniqueId())  || PlotPlayer.from(player).getCurrentPlot().isAdded(player.getUniqueId()))) {
-                    checkOther(player, event);
-                }
+        if(player.hasPermission(Permissions.interact)) {
+            if(PlotPlayer.from(player).getCurrentPlot() != null) {
+                checkOther(player, event);
+            }else if(PlotPlayer.from(player).getLocation().isPlotRoad()) {
+                checkOther(player, event);
             }
-        }else if(player.hasPermission(adminperms)) {
-            checkOther(player, event);
         }
     }
     @EventHandler (priority = EventPriority.HIGHEST)
@@ -210,28 +203,44 @@ public class InventoryClickHandler implements Listener {
                     getNoClick().add(event.getPlayer().getUniqueId());
                 }
             }
+            if(event.getClickedBlock().getType().equals(Material.SMITHING_TABLE)) {
+                if (!p.hasPermission(Permissions.editsmithingtable)) {
+                    getNoClick().add(event.getPlayer().getUniqueId());
+                }
+            }
+            if(event.getClickedBlock().getType().equals(Material.BLAST_FURNACE)) {
+                if (!p.hasPermission(Permissions.editblastfurnace)) {
+                    getNoClick().add(event.getPlayer().getUniqueId());
+                }
+            }
+            if(event.getClickedBlock().getType().equals(Material.ANVIL)) {
+                if (!p.hasPermission(Permissions.editanvil)) {
+                    getNoClick().add(event.getPlayer().getUniqueId());
+                }
+            }
+            if(event.getClickedBlock().getType().equals(Material.ENCHANTING_TABLE)) {
+                if (!p.hasPermission(Permissions.editenchantmenttable)) {
+                    getNoClick().add(event.getPlayer().getUniqueId());
+                }
+            }
+            if(event.getClickedBlock().getType().equals(Material.GRINDSTONE)) {
+                if (!p.hasPermission(Permissions.editgrindstone)) {
+                    getNoClick().add(event.getPlayer().getUniqueId());
+                }
+            }
             allShulker(p, event);
         }
     }
     private void checkOther(Player p, PlayerInteractEntityEvent event) {
         if (event.getRightClicked().getType().equals(EntityType.MINECART_HOPPER)) {
-            if (!p.hasPermission("system.plot.edit.hopperminecart")) {
+            if (!p.hasPermission(Permissions.edithoppercart)) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
         if (event.getRightClicked().getType().equals(EntityType.MINECART_CHEST)) {
-            if (!p.hasPermission("system.plot.edit.chestminecart")) {
+            if (!p.hasPermission(Permissions.editchestcart)) {
                 getNoClick().add(event.getPlayer().getUniqueId());
             }
         }
-    }
-    public static void isBlockonUsersPlot(Player player, Block block) {
-        PlotPlayer plotPlayer = PlotPlayer.from(player);
-        PlotLoc loc = new PlotLoc(block.getX(), block.getY(), block.getZ());
-        BlockLoc blockLoc = new BlockLoc(block.getX(), block.getY(), block.getZ());
-
-        World world = plotPlayer.getLocation().getWorld();
-        PlotAPI plotAPI = new PlotAPI();
-        player.sendMessage("Methode ausfegührt");
     }
 }

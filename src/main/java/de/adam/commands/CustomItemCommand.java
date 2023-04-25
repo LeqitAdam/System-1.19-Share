@@ -2,8 +2,8 @@ package de.adam.commands;
 
 import de.adam.main.ZockerWorldCBV1;
 import de.adam.methods.CustomItemManager;
-import de.adam.utils.Messages;
-import de.adam.utils.Permissions;
+import de.adam.files.Messages;
+import de.adam.files.Permissions;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

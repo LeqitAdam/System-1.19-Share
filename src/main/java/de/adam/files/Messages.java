@@ -1,4 +1,4 @@
-package de.adam.utils;
+package de.adam.files;
 
 public class Messages {
     public static String
