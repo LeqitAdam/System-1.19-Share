@@ -4,24 +4,15 @@ import de.adam.cbsystemv1.commands.*;
 import de.adam.cbsystemv1.listener.*;
 import de.adam.cbsystemv1.methods.EconManager;
 import de.adam.cbsystemv1.shop.adminshop.listener.InventoryHandler;
-import de.adam.cbsystemv1.shop.adminshop.villager.AdminshopVillager;
 import de.adam.cbsystemv1.shop.adminshop.villager.VillagerHandler;
-import de.adam.globalsystemv1.main.GlobalSystemSpigot;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Scoreboard;
-
-import java.io.File;
+import org.bukkit.scoreboard.Scoreboard;;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -35,7 +26,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         return ZockerWorldCBV1.instance;
     }
     Scoreboard sb;
-    public static String prefix = "§9CityBuild§7 » ";
+    public static String prefix = "§9CityBuild §7» ";
     public ArrayList<String> admin = new ArrayList<String>();
     public ArrayList<String> spec = new ArrayList<String>();
     private static ZockerWorldCBV1 plugin;
@@ -56,7 +47,6 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         registerEcon();
 
         this.getServer().getPluginManager().registerEvents(this, this);
-        this.loadListener(Bukkit.getPluginManager());
 
         ZockerWorldCBV1.plugin = this;
         this.getServer().getPluginManager().registerEvents(new RepairHandler(), this);
@@ -101,13 +91,14 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     }
     //Clearlag Methods
     private void startClearLag(){
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-            ClearlagCommand cl = new ClearlagCommand();
-            cl.clearlag();
-        }, 20*60*15, 20*60*15);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            public void run() {
+                ClearlagCommand clear = new ClearlagCommand();
+                clear.clearlag();
+            }
+        }, 0L, 20L * 60L * 15L); // 20 ticks per second * 60 seconds * 15 minutes
         anounceClearLag();
     }
-    private int time;
     private void anounceClearLag(){
         Bukkit.getScheduler().runTaskLater(this, () -> {
             for(Player all : Bukkit.getOnlinePlayers()){
@@ -118,8 +109,6 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     }
     public static ZockerWorldCBV1 getPlugin() {
         return plugin;
-    }
-    private void loadListener(final PluginManager pluginManager) {
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {

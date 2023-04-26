@@ -1,8 +1,8 @@
 package de.adam.cbsystemv1.shop.adminshop.methods;
 
 import com.google.common.collect.Lists;
-import de.adam.cbsystemv1.shop.Names;
-import de.adam.cbsystemv1.shop.Prices;
+import de.adam.cbsystemv1.shop.files.Names;
+import de.adam.cbsystemv1.shop.files.Prices;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import de.adam.globalsystemv1.utils.ReformatNumber;
 import org.bukkit.Material;

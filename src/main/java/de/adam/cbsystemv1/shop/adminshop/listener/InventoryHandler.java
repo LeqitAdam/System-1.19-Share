@@ -1,20 +1,17 @@
 package de.adam.cbsystemv1.shop.adminshop.listener;
 
 import de.adam.cbsystemv1.listener.InventoryClickHandler;
-import de.adam.cbsystemv1.shop.Names;
-import de.adam.cbsystemv1.shop.Prices;
-import de.adam.cbsystemv1.shop.adminshop.methods.BuyManager;
+import de.adam.cbsystemv1.shop.files.Names;
+import de.adam.cbsystemv1.shop.files.Prices;
+import de.adam.cbsystemv1.shop.methods.BuyManager;
 import de.adam.cbsystemv1.shop.adminshop.methods.InvManager;
 import de.adam.cbsystemv1.shop.adminshop.methods.ItemManager;
-import de.adam.cbsystemv1.shop.adminshop.villager.AdminshopVillager;
-import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryHandler implements Listener {
     @EventHandler

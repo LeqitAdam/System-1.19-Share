@@ -1,4 +1,4 @@
-package de.adam.cbsystemv1.shop.adminshop.methods;
+package de.adam.cbsystemv1.shop.methods;
 
 import com.google.common.collect.Lists;
 import de.adam.cbsystemv1.files.Messages;
@@ -6,9 +6,7 @@ import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import de.adam.cbsystemv1.methods.EconManager;
 import de.adam.cbsystemv1.shop.adminshop.villager.VillagerHandler;
 import de.adam.globalsystemv1.files.FileManager;
-import de.adam.globalsystemv1.files.uuid;
 import de.adam.globalsystemv1.main.GlobalSystemSpigot;
-import de.adam.globalsystemv1.methods.InventoryManager;
 import de.adam.globalsystemv1.methods.PermsManager;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import de.adam.globalsystemv1.utils.ReformatNumber;
@@ -16,7 +14,6 @@ import de.adam.globalsystemv1.utils.ReformatText;
 import de.adam.globalsystemv1.utils.ReformatTime;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -68,9 +65,10 @@ public class BuyManager {
                 List<String> lore = Lists.newArrayList();
                 lore.add("§7§m-----------------------------------");
                 lore.add("§bDieses Item wurde original im §4Admin§cShop §bgekauft.");
-                lore.add("§aGekauft §7von " + playername + " §7am §a" + ReformatTime.formatMillisToDateTime(System.currentTimeMillis()));
                 itemMeta.setLore(lore);
                 item.setItemMeta(itemMeta);
+                AdvancedItemStack.setNBTTag(item, "buyedwho", "§aItem gekauft §7von " + playername + " §7am: §b" + ReformatTime.formatMillisToDateTime(System.currentTimeMillis()));
+                AdvancedItemStack.setNBTTag(item, "isreal", "§bidentify: §abuyed §7in §4Admin§cShop");
                 player.getInventory().addItem(item);
                 player.sendMessage(ZockerWorldCBV1.prefix + "§7Du hast " + itemname + " §7für §b" + preis + " §7gekauft.");
 

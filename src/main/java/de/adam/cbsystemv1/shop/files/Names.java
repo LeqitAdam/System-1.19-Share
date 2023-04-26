@@ -1,4 +1,4 @@
-package de.adam.cbsystemv1.shop;
+package de.adam.cbsystemv1.shop.files;
 
 public class Names {
     public static String
