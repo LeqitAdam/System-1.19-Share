@@ -27,7 +27,27 @@ public class CustomItemManager {
         lore.add("§eRechtsclick §7zum einlösen.");
         itemMeta.setLore(lore);
         createdItem.setItemMeta(itemMeta);
-        AdvancedItemStack.setNBTTag(createdItem, "4067593");
+        AdvancedItemStack.setNBTTag(createdItem, "isreal", "§bidentify: §agewonnen in der §dZockerKiste");
+        createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
+        return createdItem;
+    }
+    public ItemStack createRandItem(String name, int amount, Material material, String value) {
+        AdvancedItemStack createdItem = new AdvancedItemStack(material, amount);
+        ItemMeta itemMeta = createdItem.getItemMeta();
+        String itemname = ChatColor.translateAlternateColorCodes('&', name);
+        itemMeta.setDisplayName(itemname);
+        List<String> lore;
+        if (itemMeta.getLore() == null) {
+            lore = Lists.newArrayList();
+        } else {
+            lore = (List<String>) itemMeta.getLore();
+        }
+        lore.add("§7§m-----------------------------------");
+        lore.add(name + " §aItem");
+        lore.add("§eRechtsclick §7zum einlösen.");
+        itemMeta.setLore(lore);
+        createdItem.setItemMeta(itemMeta);
+        AdvancedItemStack.setNBTTag(createdItem, "isreal", value);
         createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
         return createdItem;
     }

@@ -1,10 +1,11 @@
 package de.adam.cbsystemv1.main;
 
+import com.earth2me.essentials.Essentials;
 import de.adam.cbsystemv1.commands.*;
 import de.adam.cbsystemv1.listener.*;
 import de.adam.cbsystemv1.methods.EconManager;
-import de.adam.cbsystemv1.shop.adminshop.listener.InventoryHandler;
 import de.adam.cbsystemv1.shop.adminshop.villager.VillagerHandler;
+import de.adam.globalsystemv1.listener.TabCompleteHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +20,6 @@ import java.util.logging.Logger;
 public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
 
     //"Unknown command. Type \"/help\" for help.";
-
     @SuppressWarnings("unused")
     private static ZockerWorldCBV1 instance;
     public static ZockerWorldCBV1 getInstance() {
@@ -44,6 +44,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
 
         registerCommands();
         resgisterEvents();
+        registerTabCompletes();
         registerEcon();
 
         this.getServer().getPluginManager().registerEvents(this, this);
@@ -61,23 +62,29 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         Bukkit.getConsoleSender().sendMessage("§a");
         Bukkit.getConsoleSender().sendMessage("§7§m============§4| §6(§a System §6) §4|§7§m============");
     }
-    public void registerCommands() {
+    private void registerCommands() {
         getCommand("setspawn").setExecutor(new SetspawnCommand());
         getCommand("clearlag").setExecutor(new ClearlagCommand());
         getCommand("werkbank").setExecutor(new WerkbankCommand());
         getCommand("sign").setExecutor(new SignCommand(plugin));
         getCommand("customitem").setExecutor(new CustomItemCommand());
         getCommand("setshop").setExecutor(new SetshopCommand());
+        getCommand("warp").setExecutor(new WarpCommand());
+        getCommand("rand").setExecutor(new RandCommand());
     }
-    public void resgisterEvents() {
+    private void registerTabCompletes() {
+        getCommand("customitem").setTabCompleter(new TabCompleteHandler());
+    }
+    private void resgisterEvents() {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new InventoryClickHandler(), this);
         pm.registerEvents(new CommandHandler(), this);
         pm.registerEvents(new PlayerHandler(), this);
         pm.registerEvents(new RepairHandler(), this);
         pm.registerEvents(new CustomItemHandler(), this);
-        pm.registerEvents(new InventoryHandler(), this);
         pm.registerEvents(new VillagerHandler(), this);
+        pm.registerEvents(new InventoryHandler(), this);
+        pm.registerEvents(new de.adam.cbsystemv1.shop.adminshop.listener.InventoryHandler(), this);
     }
     public void registerEcon() {
         EconManager econ = new EconManager();

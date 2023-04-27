@@ -2,6 +2,8 @@ package de.adam.cbsystemv1.shop.files;
 
 public class Names {
     public static String
+    warpinvname = "§9Warp§7-§9System",
+    randinvname = "§9Rand §abearbeiten",
     //Adminshop
         //1st row
             endportalname = "§dEndportalrahmen",

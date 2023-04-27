@@ -2,6 +2,7 @@ package de.adam.cbsystemv1.listener;
 import com.google.common.collect.Lists;
 import com.plotsquared.core.player.PlotPlayer;
 import de.adam.cbsystemv1.files.Permissions;
+import de.adam.cbsystemv1.shop.files.Names;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -49,6 +50,17 @@ public class InventoryClickHandler implements Listener {
             }else if(PlotPlayer.from(player).getLocation().isPlotRoad()){
                 checkPerms(player, event);
             }
+        }
+    }
+    @EventHandler
+    private void checkInvClick(InventoryClickEvent event) {
+        //Warp inv
+        if(event.getView().getTitle().equals(Names.warpinvname)) {
+            getNoClick().add(event.getWhoClicked().getUniqueId());
+        }
+        //Rand inv
+        if(event.getView().getTitle().equals(Names.randinvname)) {
+            getNoClick().add(event.getWhoClicked().getUniqueId());
         }
     }
     @EventHandler

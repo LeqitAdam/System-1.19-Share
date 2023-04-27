@@ -12,6 +12,7 @@ public class Permissions {
     //CustomItemPerms
             creatcustomitemcommand = "zockerworld.create.customitem",
             createzockeritem = "zockerworld.create.zockeritem",
+            createranditem = "zockerworld.create.randitem",
     //InteracWithPlotsPerms
             interact = "plots.admin.interact.other",
             editchest = "zockerworld.plots.edit.chest",
@@ -30,12 +31,37 @@ public class Permissions {
             edithoppercart = "zockerworld.plots.edit.hoppercart",
             editchestcart = "zockerworld.plots.edit.chestcart",
     //CustomItemRankAdd
-            bypassrankaddblock = "zockerworld.rank.redeed.bypass",
+            bypassrankaddblock = "zockerworld.bypass.rank.redeem",
     //CommandBlockPerms
-            bypassadmincommands = "zockerworld.admin.commands",
+            bypassadmincommands = "zockerworld.commands.admin",
     //SetshopCommand
             setvillager = "zockerworld.setvillager",
             killvillager = "zockerworld.killvillager",
+    //WarpCommand
+            warpcommand = "zockerworld.warp",
+    //RandCommand
+            randcommand = "zockerworld.rand",
+            randcommandbypass = "zockerworld.bypass.rand",
+        //1st row
+            randcommanddef = "zockerworld.rand.default",
+            randcommandgold = "zockerworld.rand.gold",
+            randcommandsmaragd = "zockerworld.rand.smaradg",
+            randcommanddia = "zockerworld.rand.diamant",
+            randcommandobi = "zockerworld.rand.obsidian",
+            randcommandendportalframe = "zockerworld.rand.endportalframe",
+            randcommandendstab = "zockerworld.rand.endstab",
+            randcommandbookshelf = "zockerworld.rand.bücherregal",
+            randcommandcobweb = "zockerworld.rand.cobweb",
+        //2nd row
+            randcommandbeacon = "zockerworld.rand.beacon",
+            randcommandenchanter = "zockerworld.rand.enchanter",
+            randcommandsealaterne = "zockerworld.rand.sealantern",
+            randcommandglowstone  = "zockerworld.rand.glowstone",
+            randcommandgildedblackstone  = "zockerworld.rand.gildedblackstone",
+            randcommandcryingobi  = "zockerworld.rand.cryingobsidian",
+            randcommandmagmablock  = "zockerworld.rand.magmablock",
+            randcommandjackolantern  = "zockerworld.rand.jackolantern",
+            randcommandcampfire  = "zockerworld.rand.campfire",
     //WerkbankCommandPerms
             wbcommand = "zockerworld.wb";
 }

@@ -3,7 +3,7 @@ package de.adam.cbsystemv1.files;
 public class Messages {
     public static String
             notenoughbalance = "§cDu hast nicht genug Geld.",
-
+            unknownmaterial = "§cDieses Material ist unbekannt.",
     //SignCommand
             signcommandusage = "§cBitte benutze: §7/sign <Nachricht>",
             signcommanddelusage = "§cBitte benutze: §7/sign del",
@@ -26,6 +26,14 @@ public class Messages {
             zockerrankadded = "§7Du hast den §dZocker§7-§aRang §7erhalten.",
     //Setvillager
             setvillagercommandusage = "§7Nutze /setvillager <admin, shop>",
+    //WarpCommand
+            warpcommandusage = "§cBitte benutze: §7/warp <warp>",
+            warpcommandteleported1 = "§7Du wurdest zum §aWarp§7: §b",
+            warpcommandteleported2 = " §7teleportiert.",
+            warpnotfound = "§cDieser Warp wurde nicht gefunden.",
+    //RandCommand
+            randcommandusage = "",
+            randcommandnoperms = "§cDu darfst diesen Rand nicht verwenden.",
     //WerkbankCommand
             wbcommandusage = "§cBitte benutze: §7/wb";
 }
