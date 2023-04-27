@@ -1,6 +1,7 @@
 package de.adam.cbsystemv1.methods;
 
 import com.google.common.collect.Lists;
+import de.adam.cbsystemv1.listener.CustomItemHandler;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,7 +28,7 @@ public class CustomItemManager {
         lore.add("§eRechtsclick §7zum einlösen.");
         itemMeta.setLore(lore);
         createdItem.setItemMeta(itemMeta);
-        AdvancedItemStack.setNBTTag(createdItem, "isreal", "§bidentify: §agewonnen in der §dZockerKiste");
+        AdvancedItemStack.setNBTTag(createdItem, CustomItemHandler.keyforrank, "§bidentify: §agewonnen in der §dZockerKiste");
         createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
         return createdItem;
     }
@@ -47,7 +48,7 @@ public class CustomItemManager {
         lore.add("§eRechtsclick §7zum einlösen.");
         itemMeta.setLore(lore);
         createdItem.setItemMeta(itemMeta);
-        AdvancedItemStack.setNBTTag(createdItem, "isreal", value);
+        AdvancedItemStack.setNBTTag(createdItem, CustomItemHandler.keyforrand, value);
         createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
         return createdItem;
     }

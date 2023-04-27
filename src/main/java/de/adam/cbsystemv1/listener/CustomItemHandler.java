@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomItemHandler implements Listener {
+    public static String keyforrand = "isranditem";
+    public static String keyforrank = "isrankwon";
     @EventHandler
     public void onRedeemStuff(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -28,8 +30,8 @@ public class CustomItemHandler implements Listener {
         || event.getAction().equals(Action.LEFT_CLICK_AIR) ||event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if(item != null) {
                 //Zocker Rang add
-                if(AdvancedItemStack.getNBTTag(item, "isreal") != null) {
-                    if(AdvancedItemStack.getNBTTag(item, "isreal").equals("§bidentify: §agewonnen in der §dZockerKiste")) {
+                if(AdvancedItemStack.getNBTTag(item, keyforrank) != null) {
+                    if(AdvancedItemStack.getNBTTag(item, keyforrank).equals("§bidentify: §agewonnen in der §dZockerKiste")) {
                         event.setCancelled(true);
                         if(PermsManager.getSmallestSortID(player) > PermsManager.getGroup("Zocker").getSortId()) {
                             addZockerRang(player, item);
@@ -41,8 +43,8 @@ public class CustomItemHandler implements Listener {
                     }
                 }
                 //Rand Item perms
-                if(AdvancedItemStack.getNBTTag(item, "isreal") != null) {
-                    if(CustomItemCommand.getRandItems().contains(AdvancedItemStack.getNBTTag(item, "isreal"))) {
+                if(AdvancedItemStack.getNBTTag(item, keyforrand) != null) {
+                    if(CustomItemCommand.getRandItems().contains(AdvancedItemStack.getNBTTag(item, keyforrand))) {
                         event.setCancelled(true);
                         // Define the map of NBT tag values to materials and permissions
                         Map<String, Tuple<Material, String>> nbtMap = new HashMap<>();
@@ -64,7 +66,7 @@ public class CustomItemHandler implements Listener {
                         nbtMap.put("jack_o_lantern", new Tuple<>(Material.JACK_O_LANTERN, Permissions.randcommandjackolantern));
                         nbtMap.put("campfire", new Tuple<>(Material.CAMPFIRE, Permissions.randcommandcampfire));
                         // Loop through the NBT tag values and add permissions for the corresponding material
-                        String tagValue = AdvancedItemStack.getNBTTag(item, "isreal");
+                        String tagValue = AdvancedItemStack.getNBTTag(item, keyforrand);
                         if (nbtMap.containsKey(tagValue)) {
                             Tuple<Material, String> materialAndPerm = nbtMap.get(tagValue);
                             addRandPerm(player, item, materialAndPerm.getFirst().name().toLowerCase(), materialAndPerm.getSecond());
