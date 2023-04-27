@@ -33,8 +33,8 @@ public class BuyManager {
             EconomyResponse r = econ.withdrawPlayer(player, price);
             if(r.transactionSuccess()) {
                 ItemStack buyedItem = new ItemStack(material);
-                player.getInventory().addItem(buyedItem);
                 player.sendMessage(ZockerWorldCBV1.prefix + "§7Du hast " + itemname + " §7für §b" + preis + " §7gekauft.");
+                player.getInventory().addItem(buyedItem);
 
                 if(conf.getString(GlobalSystemSpigot.settingspath).equalsIgnoreCase("local")) {
                     String villagername = VillagerHandler.getAdminshopname();
