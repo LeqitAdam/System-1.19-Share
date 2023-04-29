@@ -71,7 +71,7 @@ public class CustomItemCommand implements CommandExecutor {
         alleränder.add("emerald_block");
         alleränder.add("diamond_block");
         alleränder.add("obsidian");
-        alleränder.add("end_portal_fram");
+        alleränder.add("end_portal_frame");
         alleränder.add("end_rod");
         alleränder.add("bookshelf");
         alleränder.add("cobweb");

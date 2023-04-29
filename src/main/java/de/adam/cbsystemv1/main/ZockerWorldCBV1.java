@@ -1,6 +1,5 @@
 package de.adam.cbsystemv1.main;
 
-import com.earth2me.essentials.Essentials;
 import de.adam.cbsystemv1.commands.*;
 import de.adam.cbsystemv1.listener.*;
 import de.adam.cbsystemv1.methods.EconManager;
@@ -101,7 +100,7 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
                 ClearlagCommand clear = new ClearlagCommand();
-                clear.clearlag();
+                clear.clearLag();
             }
         }, 0L, 20L * 60L * 15L); // 20 ticks per second * 60 seconds * 15 minutes
         anounceClearLag();

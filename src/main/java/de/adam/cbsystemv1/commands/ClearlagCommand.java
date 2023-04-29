@@ -8,10 +8,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 
 public class ClearlagCommand implements CommandExecutor {
 
@@ -21,20 +18,20 @@ public class ClearlagCommand implements CommandExecutor {
             Player p = (Player) sender;
             if(p.hasPermission(Permissions.clearlagcommand)){
                 if(args.length == 0){
-                    clearlag();
+                    clearLag();
                     return true;
                 } else p.sendMessage(ZockerWorldCBV1.prefix + Messages.clearlagcommandusage);
             } else p.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
         } else sender.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.onlyplayeruse);
-        clearlag();
+        clearLag();
         return false;
     }
-    public void clearlag(){
+    public void clearlag1(){
         int itemcount = 0;
         for(World w : Bukkit.getServer().getWorlds()){
             for(Entity e : w.getEntities()){
                 if(e != null) {
-                    if(e.getType() == EntityType.DROPPED_ITEM || e.getType().getName() == null){
+                    if(e.getType() == EntityType.DROPPED_ITEM){
                         itemcount += ((Item) e).getItemStack().getAmount();
                         e.remove();
                     }
@@ -50,4 +47,32 @@ public class ClearlagCommand implements CommandExecutor {
             }
         }
     }
+    public void clearLag() {
+        int itemCount = 0;
+        int mobCount = 0;
+        for (World world : Bukkit.getWorlds()) {
+            for (Entity entity : world.getEntities()) {
+                if (entity instanceof Item) {
+                    itemCount += ((Item) entity).getItemStack().getAmount();
+                    entity.remove();
+                } else if (entity instanceof Mob && !entity.isCustomNameVisible()) {
+                    mobCount++;
+                    entity.remove();
+                }
+            }
+        }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (itemCount == 1) {
+                player.sendMessage(ZockerWorldCBV1.prefix + " §7Es wurde §c" + itemCount + " §7Item entfernt");
+            } else {
+                player.sendMessage(ZockerWorldCBV1.prefix + " §7Es wurden §c" + itemCount + " §7Items entfernt");
+            }
+            if (mobCount == 1) {
+                player.sendMessage(ZockerWorldCBV1.prefix + " §7Es wurde §c" + mobCount + " §7Mob entfernt");
+            } else if (mobCount > 1) {
+                player.sendMessage(ZockerWorldCBV1.prefix + " §7Es wurden §c" + mobCount + " §7Mobs entfernt");
+            }
+        }
+    }
+
 }

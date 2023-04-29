@@ -1,11 +1,20 @@
 package de.adam.cbsystemv1.listener;
 import com.google.common.collect.Lists;
 import com.plotsquared.core.player.PlotPlayer;
+import com.plotsquared.core.plot.Plot;
 import de.adam.cbsystemv1.files.Permissions;
 import de.adam.cbsystemv1.shop.files.Names;
+import de.adam.globalsystemv1.files.uuid;
+import de.adam.globalsystemv1.methods.PermsManager;
+import de.adam.globalsystemv1.utils.ReformatText;
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionUser;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,6 +22,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,47 +47,107 @@ public class InventoryClickHandler implements Listener {
     }
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onMove(final InventoryDragEvent event) {
+        Player player = (Player) event.getWhoClicked();
         if (getNoClick().contains(event.getWhoClicked().getUniqueId())) {
             event.setCancelled(true);
+        }
+
+        String title = event.getView().getTitle();
+        if(title.contains("§5§lEnderChest") ||title.contains("§dEnder Chest")) {
+            if(event.getView().getTitle().equals("§5§lEnderChest §7- §5" + player.getName())) {
+                return;
+            }
+            if(player.hasPermission("zockerworld.ec.edit")) {
+                OfflinePlayer offtarget = ReformatText.getOffPlayerfromECTitle(title);
+                IPermissionUser permsuser  = CloudNetDriver.getInstance().getPermissionManagement().getUser(offtarget.getUniqueId());
+                int playersort = PermsManager.getSmallestSortID(player);
+                int targetsort = PermsManager.getOffSmallestSortID(offtarget);
+                if(playersort <= targetsort && !PermsManager.hasUserPerm(permsuser, "zockerworld.edit.ec.*")) {
+                    return;
+                }
+                if(player.getUniqueId().equals(uuid.leqitadam) || player.hasPermission("zockerworld.ec.edit.*")) {
+                    return;
+                }
+            }
+            event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    private void checkInvClick(final InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        String title = event.getView().getTitle();
+        //Warp inv
+        if(title.equals(Names.warpinvname)) {
+            getNoClick().add(player.getUniqueId());
+        }
+        //Rand inv
+        if(title.equals(Names.randinvname)) {
+            getNoClick().add(player.getUniqueId());
+        }
+        if(title.contains("§5§lEnderChest") ||title.contains("§dEnder Chest")) {
+            if(event.getView().getTitle().equals("§5§lEnderChest §7- §5" + player.getName())) {
+                return;
+            }
+            if(player.hasPermission("zockerworld.ec.edit")) {
+                OfflinePlayer offtarget = ReformatText.getOffPlayerfromECTitle(title);
+                IPermissionUser permsuser  = CloudNetDriver.getInstance().getPermissionManagement().getUser(offtarget.getUniqueId());
+                int playersort = PermsManager.getSmallestSortID(player);
+                int targetsort = PermsManager.getOffSmallestSortID(offtarget);
+                if(playersort <= targetsort  && !PermsManager.hasUserPerm(permsuser, "zockerworld.edit.ec.*")) {
+                    return;
+                }
+                if(player.getUniqueId().equals(uuid.leqitadam) || player.hasPermission("zockerworld.ec.edit.*")) {
+                    return;
+                }
+            }
+            Inventory playerInv = player.getOpenInventory().getTopInventory();
+            if(event.getClickedInventory().equals(playerInv)) {
+                event.setCancelled(true);
+            }else if(event.getClick().isShiftClick()) {
+                event.setCancelled(true);
+            }else if(event.getClick().equals(ClickType.DOUBLE_CLICK)) {
+                event.setCancelled(true);
+            }else if(event.getClick().equals(ClickType.CONTROL_DROP)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    @EventHandler (priority = EventPriority.HIGHEST)
+    public void onClose(InventoryCloseEvent event) {
+        if (getNoClick().contains(event.getPlayer().getUniqueId())) {
+            getNoClick().remove(event.getPlayer().getUniqueId());
         }
     }
     @EventHandler
     public void onBuild(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if(player.hasPermission(Permissions.interact)) {
-            if(PlotPlayer.from(player).getCurrentPlot() != null) {
+            PlotPlayer plotPlayer = PlotPlayer.from(player);
+            Plot plot = plotPlayer.getCurrentPlot();
+            if(plot != null) {
+                if(plot.isOwner(player.getUniqueId()) || plot.isAdded(player.getUniqueId())) {
+                    return;
+                }
                 checkPerms(player, event);
-            }else if(PlotPlayer.from(player).getLocation().isPlotRoad()){
+            }else if(plotPlayer.getLocation().isPlotArea()) {
                 checkPerms(player, event);
             }
-        }
-    }
-    @EventHandler
-    private void checkInvClick(InventoryClickEvent event) {
-        //Warp inv
-        if(event.getView().getTitle().equals(Names.warpinvname)) {
-            getNoClick().add(event.getWhoClicked().getUniqueId());
-        }
-        //Rand inv
-        if(event.getView().getTitle().equals(Names.randinvname)) {
-            getNoClick().add(event.getWhoClicked().getUniqueId());
         }
     }
     @EventHandler
     public void onEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         if(player.hasPermission(Permissions.interact)) {
-            if(PlotPlayer.from(player).getCurrentPlot() != null) {
+            PlotPlayer plotPlayer = PlotPlayer.from(player);
+            Plot plot = plotPlayer.getCurrentPlot();
+            if(plot != null) {
+                if(plot.isOwner(player.getUniqueId()) || plot.isAdded(player.getUniqueId())) {
+                    return;
+                }
                 checkOther(player, event);
-            }else if(PlotPlayer.from(player).getLocation().isPlotRoad()) {
+            }else if(plotPlayer.getLocation().isPlotArea()) {
                 checkOther(player, event);
             }
-        }
-    }
-    @EventHandler (priority = EventPriority.HIGHEST)
-    public void onClose(final InventoryCloseEvent event) {
-        if (getNoClick().contains(event.getPlayer().getUniqueId())) {
-            getNoClick().remove(event.getPlayer().getUniqueId());
         }
     }
     public void allShulker(Player p, PlayerInteractEvent event) {

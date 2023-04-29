@@ -34,6 +34,8 @@ public class Messages {
     //RandCommand
             randcommandusage = "",
             randcommandnoperms = "§cDu darfst diesen Rand nicht verwenden.",
+    //EcCommand
+            ecuseuuid = "§cDieser Spieler ist nicht online, benutze bitte die UUID.",
     //WerkbankCommand
             wbcommandusage = "§cBitte benutze: §7/wb";
 }
