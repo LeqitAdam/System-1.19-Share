@@ -5,6 +5,8 @@ import de.adam.cbsystemv1.files.Permissions;
 import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import de.adam.cbsystemv1.methods.CustomItemManager;
 import de.adam.cbsystemv1.methods.ItemManager;
+import de.adam.globalsystemv1.utils.ReformatText;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -55,6 +57,40 @@ public class CustomItemCommand implements CommandExecutor {
                                         }else player.sendMessage(ZockerWorldCBV1.prefix + "Diesen Rand gibt es nicht.");
                                     }else player.sendMessage(ZockerWorldCBV1.prefix + Messages.unknownmaterial);
                                 }else player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
+                            }else if(args[1].equalsIgnoreCase("chestitem") || args[1].equalsIgnoreCase("chest")) {
+                                if(player.hasPermission(Permissions.createchestitem)) {
+                                    if(args[2].equalsIgnoreCase("zockerchest") || args[2].equalsIgnoreCase("zocker")) {
+                                        Material material = Material.PURPLE_SHULKER_BOX;
+                                        String name = "§x§6§1§0§0§b§4§lZ§x§6§e§0§0§b§b§lo§x§7§a§0§0§c§2§lc§x§8§7§0§0§c§9§lk§x§9§4§0§0§d§0§le§x§a§1§0§0§d§7§lr§x§a§d§0§0§d§e§lK§x§b§a§0§0§e§5§li§x§c§7§0§0§e§c§ls§x§d§3§0§0§f§3§lt§x§e§0§0§0§f§a§le";
+                                        ItemStack giveItem = itemManager.createChestItem(name, 1, material, "ZockerChest Key");
+                                        player.getInventory().addItem(giveItem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else if(args[2].equalsIgnoreCase("gamerchest") ||args[2].equalsIgnoreCase("gamer")) {
+                                        Material material = Material.ENDER_CHEST;
+                                        String name = "§x§6§1§0§0§b§4§lZ§x§6§e§0§0§b§b§lo§x§7§a§0§0§c§2§lc§x§8§7§0§0§c§9§lk§x§9§4§0§0§d§0§le§x§a§1§0§0§d§7§lr§x§a§d§0§0§d§e§lK§x§b§a§0§0§e§5§li§x§c§7§0§0§e§c§ls§x§d§3§0§0§f§3§lt§x§e§0§0§0§f§a§le";
+                                        ItemStack giveItem = itemManager.createChestItem(name, 1, material, "GamerChest Key");
+                                        player.getInventory().addItem(giveItem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else if(args[2].equalsIgnoreCase("supremechest") ||args[2].equalsIgnoreCase("supreme")) {
+                                        String name = "§x§6§1§0§0§b§4§lZ§x§6§e§0§0§b§b§lo§x§7§a§0§0§c§2§lc§x§8§7§0§0§c§9§lk§x§9§4§0§0§d§0§le§x§a§1§0§0§d§7§lr§x§a§d§0§0§d§e§lK§x§b§a§0§0§e§5§li§x§c§7§0§0§e§c§ls§x§d§3§0§0§f§3§lt§x§e§0§0§0§f§a§le";
+                                        Material material = Material.ENDER_CHEST;
+                                        ItemStack giveItem = itemManager.createChestItem(name, 1, material, "SupremeChest Key");
+                                        player.getInventory().addItem(giveItem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else if(args[2].equalsIgnoreCase("premiumchest") ||args[2].equalsIgnoreCase("premium")) {
+                                        String name = "§x§6§1§0§0§b§4§lZ§x§6§e§0§0§b§b§lo§x§7§a§0§0§c§2§lc§x§8§7§0§0§c§9§lk§x§9§4§0§0§d§0§le§x§a§1§0§0§d§7§lr§x§a§d§0§0§d§e§lK§x§b§a§0§0§e§5§li§x§c§7§0§0§e§c§ls§x§d§3§0§0§f§3§lt§x§e§0§0§0§f§a§le";
+                                        Material material = Material.CHEST;
+                                        ItemStack giveItem = itemManager.createChestItem(name, 1, material, "PremiumChest Key");
+                                        player.getInventory().addItem(giveItem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else if(args[2].equalsIgnoreCase("votechest") ||args[2].equalsIgnoreCase("vote")) {
+                                        String name = "§x§6§1§0§0§b§4§lZ§x§6§e§0§0§b§b§lo§x§7§a§0§0§c§2§lc§x§8§7§0§0§c§9§lk§x§9§4§0§0§d§0§le§x§a§1§0§0§d§7§lr§x§a§d§0§0§d§e§lK§x§b§a§0§0§e§5§li§x§c§7§0§0§e§c§ls§x§d§3§0§0§f§3§lt§x§e§0§0§0§f§a§le";
+                                        Material material = Material.CHEST;
+                                        ItemStack giveItem = itemManager.createChestItem(name, 1, material, "VoteChest Key");
+                                        player.getInventory().addItem(giveItem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }
+                                }
                             }
                         }catch (NumberFormatException e) {
                             player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.usenumber);

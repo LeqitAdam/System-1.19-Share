@@ -55,7 +55,7 @@ public class ClearlagCommand implements CommandExecutor {
                 if (entity instanceof Item) {
                     itemCount += ((Item) entity).getItemStack().getAmount();
                     entity.remove();
-                } else if (entity instanceof Mob && !entity.isCustomNameVisible()) {
+                } else if (entity instanceof Mob && entity.getCustomName() == null) {
                     mobCount++;
                     entity.remove();
                 }

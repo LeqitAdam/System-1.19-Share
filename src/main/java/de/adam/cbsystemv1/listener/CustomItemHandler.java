@@ -22,6 +22,7 @@ import java.util.Map;
 public class CustomItemHandler implements Listener {
     public static String keyforrand = "isranditem";
     public static String keyforrank = "isrankwon";
+    public static String keyforchest = "chestkey";
     @EventHandler
     public void onRedeemStuff(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -72,6 +73,24 @@ public class CustomItemHandler implements Listener {
                             addRandPerm(player, item, materialAndPerm.getFirst().name().toLowerCase(), materialAndPerm.getSecond());
                         }
 
+                    }
+                }
+                //Chest Item non-placeable
+                if(AdvancedItemStack.getNBTTag(item, keyforchest) != null) {
+                    if(AdvancedItemStack.getNBTTag(item, keyforchest).equals("ZockerChest Key")) {
+                        event.setCancelled(true);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforchest).equals("GamerChest Key")) {
+                        event.setCancelled(true);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforchest).equals("SupremeChest Key")) {
+                        event.setCancelled(true);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforchest).equals("PremiumChest Key")) {
+                        event.setCancelled(true);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforchest).equals("VoteChest Key")) {
+                        event.setCancelled(true);
                     }
                 }
             }

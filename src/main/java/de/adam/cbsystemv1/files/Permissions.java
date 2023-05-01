@@ -13,6 +13,7 @@ public class Permissions {
             creatcustomitemcommand = "zockerworld.create.customitem",
             createzockeritem = "zockerworld.create.zockeritem",
             createranditem = "zockerworld.create.randitem",
+            createchestitem = "zockerworld.create.chestitem",
     //InteracWithPlotsPerms
             interact = "plots.admin.interact.other",
             editchest = "zockerworld.plots.edit.chest",

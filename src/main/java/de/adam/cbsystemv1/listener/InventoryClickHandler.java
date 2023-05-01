@@ -76,6 +76,9 @@ public class InventoryClickHandler implements Listener {
     private void checkInvClick(final InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         String title = event.getView().getTitle();
+        if(event.getClickedInventory() == null){
+            return;
+        }
         //Warp inv
         if(title.equals(Names.warpinvname)) {
             getNoClick().add(player.getUniqueId());

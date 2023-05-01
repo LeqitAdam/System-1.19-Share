@@ -52,4 +52,23 @@ public class CustomItemManager {
         createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
         return createdItem;
     }
+    public ItemStack createChestItem(String name, int amount, Material material, String value) {
+        AdvancedItemStack createdItem = new AdvancedItemStack(material, amount);
+        ItemMeta itemMeta = createdItem.getItemMeta();
+        String itemname = ChatColor.translateAlternateColorCodes('&', name);
+        itemMeta.setDisplayName(itemname);
+        List<String> lore;
+        if (itemMeta.getLore() == null) {
+            lore = Lists.newArrayList();
+        } else {
+            lore = (List<String>) itemMeta.getLore();
+        }
+        lore.add("§7§m-----------------------------------");
+        lore.add("§7Schlüssel für die " + name + "§7.");
+        itemMeta.setLore(lore);
+        createdItem.setItemMeta(itemMeta);
+        AdvancedItemStack.setNBTTag(createdItem, CustomItemHandler.keyforchest, value);
+        createdItem.addEnchantment(createdItem, Enchantment.LOOT_BONUS_BLOCKS, 21);
+        return createdItem;
+    }
 }
