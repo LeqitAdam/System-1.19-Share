@@ -4,6 +4,7 @@ public class Messages {
     public static String
             notenoughbalance = "§cDu hast nicht genug Geld.",
             unknownmaterial = "§cDieses Material ist unbekannt.",
+            notenoughinvspace = "§cDu hast nich genug Platz im inventar.",
     //SignCommand
             signcommandusage = "§cBitte benutze: §7/sign <Nachricht>",
             signcommanddelusage = "§cBitte benutze: §7/sign del",

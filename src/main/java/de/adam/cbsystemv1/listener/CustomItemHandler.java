@@ -2,6 +2,7 @@ package de.adam.cbsystemv1.listener;
 
 import de.adam.cbsystemv1.commands.CustomItemCommand;
 import de.adam.cbsystemv1.main.ZockerWorldCBV1;
+import de.adam.cbsystemv1.methods.PackManager;
 import de.adam.globalsystemv1.methods.PermsManager;
 import de.adam.globalsystemv1.utils.AdvancedItemStack;
 import de.adam.cbsystemv1.files.Messages;
@@ -23,6 +24,10 @@ public class CustomItemHandler implements Listener {
     public static String keyforrand = "isranditem";
     public static String keyforrank = "isrankwon";
     public static String keyforchest = "chestkey";
+    //Equipement Pack keys
+    public static String keyforequip = "equippack";
+    //Armor Pack keys
+    public static String keyforarmor = "armorpack";
     @EventHandler
     public void onRedeemStuff(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -93,6 +98,26 @@ public class CustomItemHandler implements Listener {
                         event.setCancelled(true);
                     }
                 }
+                if(AdvancedItemStack.getNBTTag(item, keyforequip) != null) {
+                    if(AdvancedItemStack.getNBTTag(item, keyforequip).equals("pack für Ausrüstung I")) {
+                        event.setCancelled(true);
+                        PackManager.giveEquip(player, item, 1);
+                    }
+                }
+                if(AdvancedItemStack.getNBTTag(item, keyforarmor) != null) {
+                    if(AdvancedItemStack.getNBTTag(item, keyforarmor).equals("pack für Rüstung I")) {
+                        event.setCancelled(true);
+                        PackManager.giveArmor(player, item, 1);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforarmor).equals("pack für Rüstung II")) {
+                        event.setCancelled(true);
+                        PackManager.giveArmor(player, item, 2);
+                    }
+                    if(AdvancedItemStack.getNBTTag(item, keyforarmor).equals("pack für Rüstung III")) {
+                        event.setCancelled(true);
+                        PackManager.giveArmor(player, item, 3);
+                    }
+                }
             }
         }
     }
@@ -103,7 +128,7 @@ public class CustomItemHandler implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
     }
     private void addRandPerm(Player player, ItemStack item, String block, String permission) {
-        if(PermsManager.hasUserPerm(player, permission) && !PermsManager.hasUserPerm(player, Permissions.randcommandbypass)) {
+        if(player.hasPermission(permission) && !player.hasPermission(Permissions.randcommandbypass)) {
             String rand = CustomItemCommand.getName(block);
             player.sendMessage(ZockerWorldCBV1.prefix + "§7Du hast die §bPermission §7für den " + rand + " §abereits.");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);

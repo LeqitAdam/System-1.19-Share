@@ -34,7 +34,8 @@ public class CommandHandler implements Listener {
                 event.setCancelled(true);
                 player.performCommand("ec open");
             }
-        }else if(cmd.length == 2) {
+        }
+        if(cmd.length == 2) {
             if(cmd[0].equalsIgnoreCase("ec")) {
                 if(cmd[1].equals("open")) {
                     return;
@@ -82,20 +83,22 @@ public class CommandHandler implements Listener {
                     OfflinePlayer target = Bukkit.getOfflinePlayer(cmd[2]);
                     PlotPlayer plotTarget = PlotPlayer.from(target);
                     if(!plot.isOwner(plotPlayer.getUUID())) {
-                        if(!player.hasPermission("system.admin.plot.setowner")) {
+                        if(!player.hasPermission("zockerworld.plot.admin.setowner")) {
                             event.setCancelled(true);
                             player.sendMessage("§8[§6P2§8] §cYou are lacking the permission node:");
                             player.sendMessage(" §6plots.admin.command.setowner§c.");
                         }else if(plotTarget.hasPermission("system.admin.plot.setowner.teamler") || plotTarget.hasPermission("system.admin.plot.setowner.all")) {
-                            event.setCancelled(true);
-                            player.sendMessage(ZockerWorldCBV1.prefix + " §cDiesem Spieler darfst du keine Plots geben!");
+                            if(!player.hasPermission("zockerworld.plot.admin")) {
+                                event.setCancelled(true);
+                                player.sendMessage(ZockerWorldCBV1.prefix + " §cDiesem Spieler darfst du keine Plots geben!");
+                            }
                         }
                     }else if(cmd[2].equalsIgnoreCase("-")) {
                         if(!player.hasPermission("system.admin.plot.setowner.all")) {
                             event.setCancelled(true);
                             player.sendMessage(ZockerWorldCBV1.prefix + " §cDuplizieren ist verboten!");
                         }
-                    }else if(!(plotTarget.hasPermission("system.admin.plot.setowner.teamler") || plotTarget.hasPermission("system.admin.plot.setowner.all"))) {
+                    }else if(!player.hasPermission("zockerworld.plot.setowner.*")) {
                         event.setCancelled(true);
                         player.sendMessage(ZockerWorldCBV1.prefix + " §cDiesem Spieler darfst du keine Plots geben!");
                     }

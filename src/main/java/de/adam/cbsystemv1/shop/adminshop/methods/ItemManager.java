@@ -176,7 +176,7 @@ public class ItemManager {
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(Names.netheriteswordname);
         item.setItemMeta(itemMeta);
-        item.addEnchantment(item, Enchantment.DAMAGE_ALL, 10);
+        item.addEnchantment(item, Enchantment.DAMAGE_ALL, 50);
         item.addEnchantment(item, Enchantment.DURABILITY, 10);
         item.addEnchantment(item, Enchantment.MENDING, 10);
         return item;

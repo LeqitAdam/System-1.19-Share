@@ -5,6 +5,8 @@ import de.adam.cbsystemv1.listener.*;
 import de.adam.cbsystemv1.methods.EconManager;
 import de.adam.cbsystemv1.shop.adminshop.villager.VillagerHandler;
 import de.adam.globalsystemv1.listener.TabCompleteHandler;
+import de.adam.globalsystemv1.main.GlobalSystemSpigot;
+import de.adam.globalsystemv1.utils.CountdownUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -108,11 +111,18 @@ public class ZockerWorldCBV1 extends JavaPlugin implements Listener {
     private void anounceClearLag(){
         Bukkit.getScheduler().runTaskLater(this, () -> {
             for(Player all : Bukkit.getOnlinePlayers()){
-                all.sendMessage(ZockerWorldCBV1.prefix + " §aIn 1 Minute werden alle am Boden liegenden Items gelöscht.");
+                all.sendMessage(ZockerWorldCBV1.prefix + "§aIn 1 Minute werden alle am Boden liegenden Items gelöscht.");
             }
+            countClearLag();
         }, 20*60*14);
 
     }
+    private void countClearLag() {
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            CountdownUpdater.countdown(10);
+        }, 20*49);
+    }
+
     public static ZockerWorldCBV1 getPlugin() {
         return plugin;
     }

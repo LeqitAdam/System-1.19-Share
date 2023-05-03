@@ -97,3 +97,14 @@
         if(AdvancedItemStack.getNBTTag(item, "isreal").equals("campfire")) {
             addRandPerm(player, item, "campfire", Permissions.randcommandcampfire);
         }
+
+
+        else if(args.length == 2 && args[0].equalsIgnoreCase("create")) {
+                                if(args[1].equalsIgnoreCase("Zocker") || args[1].equalsIgnoreCase("ZockerRang") || args[1].equalsIgnoreCase("ZockerItem")) {
+                                    if(player.hasPermission(Permissions.createzockeritem)) {
+                                        ItemStack giveitem = itemManager.createZockerRangItem("§dZocker§5Rang", 1, Material.NETHERITE_CHESTPLATE);
+                                        player.getInventory().addItem(giveitem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
+                                }
+                            }
