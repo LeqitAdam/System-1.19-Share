@@ -136,7 +136,10 @@ public class CustomItemHandler implements Listener {
         }
         String rand = CustomItemCommand.getName(block);
         player.sendMessage(ZockerWorldCBV1.prefix + "§7Du hast die §bPermission §7für den " + rand + " §aerhalten.");
-        player.getInventory().removeItem(item);
+        if (item != null && item.getAmount() > 0) {
+            item.setAmount(item.getAmount() - 1);
+            player.getInventory().setItemInMainHand(item);
+        }
         PermsManager.addPermission(player,  permission);
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
     }
