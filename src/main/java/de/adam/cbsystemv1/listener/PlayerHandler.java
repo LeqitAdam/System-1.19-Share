@@ -1,7 +1,5 @@
 package de.adam.cbsystemv1.listener;
 
-import com.plotsquared.core.events.PlotFlagAddEvent;
-import com.plotsquared.core.player.PlotPlayer;
 import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,7 +14,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
-import java.util.UUID;
 
 public class PlayerHandler implements Listener {
     @EventHandler
