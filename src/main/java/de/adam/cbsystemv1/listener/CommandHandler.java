@@ -6,8 +6,6 @@ import de.adam.cbsystemv1.main.ZockerWorldCBV1;
 import de.adam.cbsystemv1.files.Permissions;
 import de.adam.globalsystemv1.files.Messages;
 import de.adam.globalsystemv1.main.GlobalSystemSpigot;
-import de.dytanic.cloudnet.driver.CloudNetDriver;
-import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
