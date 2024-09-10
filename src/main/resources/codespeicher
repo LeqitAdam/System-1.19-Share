@@ -1,0 +1,110 @@
+        if(player.hasPermission(Permissions.randcommandgold)) {
+            inv.setItem(1, randGold);
+        }
+        if(player.hasPermission(Permissions.randcommandsmaragd)) {
+            inv.setItem(2, randSmaragd);
+        }
+        if(player.hasPermission(Permissions.randcommanddia)) {
+            inv.setItem(3, randDia);
+        }
+        if(player.hasPermission(Permissions.randcommandobi)) {
+            inv.setItem(4, randObi);
+        }
+        if(player.hasPermission(Permissions.randcommandendportalframe)) {
+            inv.setItem(5, randEndportalframe);
+        }
+        if(player.hasPermission(Permissions.randcommandendstab)) {
+            inv.setItem(6, randEnderstab);
+        }
+        if(player.hasPermission(Permissions.randcommandbookshelf)) {
+            inv.setItem(7, randBücherregal);
+        }
+        if(player.hasPermission(Permissions.randcommandcobweb)) {
+            inv.setItem(8, randCobweb);
+        }
+
+
+        inv.setItem(0, randDefault);
+        inv.setItem(1, randGold);
+        inv.setItem(2, randSmaragd);
+        inv.setItem(3, randDia);
+        inv.setItem(4, randObi);
+        inv.setItem(5, randEndportalrahmen);
+        inv.setItem(6, randEnderstab);
+        inv.setItem(7, randBücherregal);
+        inv.setItem(8, randCobweb);
+
+        inv.setItem(9, randBeacon);
+        inv.setItem(10, randEnchanter);
+        inv.setItem(11, randSealaterne);
+        inv.setItem(12, randGlowstone);
+        inv.setItem(13, randGlidedblackstone);
+        inv.setItem(14, randCryingObi);
+        inv.setItem(15, randMagmablock);
+        inv.setItem(16, randJackolantern);
+        inv.setItem(17, randCampfire);
+
+
+
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("gold_block")) {
+            addRandPerm(player, item, "gold_block", Permissions.randcommandgold);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("emerald_block")) {
+            addRandPerm(player, item, "emerald_block", Permissions.randcommandsmaragd);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("diamond_block")) {
+            addRandPerm(player, item, "diamond_block", Permissions.randcommanddia);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("obsidian")) {
+            addRandPerm(player, item, "obsidian", Permissions.randcommandobi);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("end_portal_frame")) {
+            addRandPerm(player, item, "end_portal_frame", Permissions.randcommandendportalframe);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("end_rod")) {
+            addRandPerm(player, item, "end_rod", Permissions.randcommandendstab);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("bookshelf")) {
+            addRandPerm(player, item, "bookshelf", Permissions.randcommandbookshelf);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("cobweb")) {
+            addRandPerm(player, item, "cobweb", Permissions.randcommandcobweb);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("beacon")) {
+            addRandPerm(player, item, "beacon", Permissions.randcommandbeacon);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("enchanting_table")) {
+            addRandPerm(player, item, "enchanting_table", Permissions.randcommandenchanter);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("sea_lantern")) {
+            addRandPerm(player, item, "sea_lantern", Permissions.randcommandsealaterne);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("glowstone")) {
+            addRandPerm(player, item, "glowstone", Permissions.randcommandglowstone);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("gilded_blackstone")) {
+            addRandPerm(player, item, "gilded_blackstone", Permissions.randcommandgildedblackstone);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("crying_obsidian")) {
+            addRandPerm(player, item, "crying_obsidian", Permissions.randcommandcryingobi);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("magma_block")) {
+            addRandPerm(player, item, "magma_block", Permissions.randcommandmagmablock);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("jack_o_lantern")) {
+            addRandPerm(player, item, "jack_o_lantern", Permissions.randcommandjackolantern);
+        }
+        if(AdvancedItemStack.getNBTTag(item, "isreal").equals("campfire")) {
+            addRandPerm(player, item, "campfire", Permissions.randcommandcampfire);
+        }
+
+
+        else if(args.length == 2 && args[0].equalsIgnoreCase("create")) {
+                                if(args[1].equalsIgnoreCase("Zocker") || args[1].equalsIgnoreCase("ZockerRang") || args[1].equalsIgnoreCase("ZockerItem")) {
+                                    if(player.hasPermission(Permissions.createzockeritem)) {
+                                        ItemStack giveitem = itemManager.createZockerRangItem("§dZocker§5Rang", 1, Material.NETHERITE_CHESTPLATE);
+                                        player.getInventory().addItem(giveitem);
+                                        player.sendMessage(ZockerWorldCBV1.prefix + Messages.customitemcreated);
+                                    }else player.sendMessage(ZockerWorldCBV1.prefix + de.adam.globalsystemv1.files.Messages.noperm);
+                                }
+                            }

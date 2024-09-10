@@ -1,1 +1,1 @@
-The pom.xml must be configured for your System.
+The pom.xml File must be configured for every System.
