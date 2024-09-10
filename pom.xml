@@ -20,7 +20,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>/Your/Output/Directory</outputDirectory>
+                    <outputDirectory>/Users/adam/IdeaProjects/libs/</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -80,6 +80,27 @@
             <artifactId>cloudnet-driver</artifactId>
             <version>3.4.5-RELEASE</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>Craftbukkit</groupId>
+            <artifactId>Craftbukkit</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>/Users/adam/Documents/Entwicklung/IdeaProjects/libs/craftbukkit-1.19.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ZockerWorld</groupId>
+            <artifactId>ZockerWorld</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>/Users/adam/Documents/Entwicklung/IdeaProjects/libs/ZockerWorldGlobal-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>EssentialsX</groupId>
+            <artifactId>EssentialsX</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>/Users/adam/Documents/Entwicklung/IdeaProjects/libs/EssentialsX-2.19.7.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.MilkBowl</groupId>
